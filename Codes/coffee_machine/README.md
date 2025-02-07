@@ -17,16 +17,6 @@ This is a simple **Coffee Machine** program written in Python. It simulates a ba
 - Python 3.x
 - `coffee_machine_data.py` file (containing `MENU`, `resources`, and `MONEY` dictionaries)
 
-##  Usage
-
-Run the following command:
-
-```bash
-python main.py
-```
-
-Follow the on-screen prompts to order coffee or check resources.
-
 ##  Features
 
 - Orders **espresso, latte, or cappuccino**
