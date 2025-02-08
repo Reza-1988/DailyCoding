@@ -1,4 +1,4 @@
-import art
+import silent_auction_art
 print(art.logo)
 
 

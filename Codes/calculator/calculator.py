@@ -1,4 +1,4 @@
-import art
+import calculator_art
 
 
 def add(n1, n2):

@@ -1,5 +1,5 @@
 import random
-import art
+import number_guessing_game_art
 
 EASY_LEVEL =10
 HARD_LEVEL = 5

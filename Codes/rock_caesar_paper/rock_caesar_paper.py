@@ -1,5 +1,5 @@
 import random
-from art import *
+from rock_caesar_paper_art import *
 
 
 game_picture  = [rock, paper, scissors]
