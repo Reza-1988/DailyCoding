@@ -15,11 +15,21 @@ class Snake:
 
     def create_snake(self):
         for x_y in X_Y_STARTING_COORDINATES:
-            square = Turtle(shape="square")
-            square.color("white")
-            square.penup()
-            square.goto(x_y)
-            self.squares.append(square)
+            self.add_square(x_y)
+
+
+    def add_square(self, x_y):
+       square = Turtle(shape="square")
+       square.color("white")
+       square.penup()
+       square.goto(x_y)
+       self.squares.append(square)
+
+
+    def extend(self):
+       self.add_square(self.squares[-1].position())
+
+
 
     def move(self):
         for square_num in range(len(self.squares) - 1, 0, -1):
