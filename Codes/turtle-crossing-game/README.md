@@ -8,7 +8,7 @@ A simple **Turtle Crossing Game** built using Python's `turtle` module. Guide th
 - **Win the Level**: Reach the top of the screen to level up and make the cars move faster.
 
 ## 🛠️ Project Structure
-📂 turtle-crossing-game/ 
+📂 turtle-crossing-game/
 ├── turtle_crossing_game.py # Main game loop & logic 
 ├── player.py # Player (Turtle) movement 
 ├── car_manager.py # Controls car generation & movement 
