@@ -12,16 +12,13 @@ data = pd.read_csv("50_states.csv")
 data_states = data["state"].tolist()
 
 guessed_states_list = []
-missing_states_list = []
 
 while len(guessed_states_list) < 50:
     answer_state = screen.textinput(title=f"{len(guessed_states_list)}/50 States Correct", prompt="What's another state's name?").title()
 
     # for exit of game and make a list of states that should be learn
     if answer_state == "Exit":
-        for state in data_states:
-            if state not in guessed_states_list:
-                missing_states_list.append(state)
+        missing_states_list = [state for state in data_states if state not in guessed_states_list]
         missing_data = pd.DataFrame(missing_states_list)
         missing_data.to_csv("states_should_learn.csv")
         break
