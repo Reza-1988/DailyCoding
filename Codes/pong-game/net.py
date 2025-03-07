@@ -1,7 +1,10 @@
 from turtle import Turtle
 
+
 nets_positions = [(0, -250), (0, -150), (0, -50), (0,50), (0,150), (0, 250)]
-class Net():
+
+
+class Net:
     def __init__(self):
         self.nets = []
         self.create_net()

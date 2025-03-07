@@ -1,4 +1,6 @@
 from turtle import Turtle
+
+
 MOVE_DISTANCE = 20
 
 
@@ -10,7 +12,6 @@ class Paddle(Turtle):
         self.shapesize(stretch_wid=5, stretch_len=1)
         self.penup()
         self.goto(x_y)
-
 
     def go_up(self):
         new_y = self.ycor() + MOVE_DISTANCE
