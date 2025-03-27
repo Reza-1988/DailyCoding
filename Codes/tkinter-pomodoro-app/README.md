@@ -21,6 +21,6 @@ To run this application, you'll need:
 
 1. **Clone the Repository** (if you're using Git):
    ```bash
-   git clone https://github.com/Reza-1988/DailyCoding/pomodo-app.git
-   cd /DailyCoding/pomodo-app.git
+   git clone https://github.com/Reza-1988/DailyCoding/Codes.git
+   cd pomodo-app.git
    python pomodoro_app.py
