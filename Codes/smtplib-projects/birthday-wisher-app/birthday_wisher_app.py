@@ -15,7 +15,7 @@ month = now.month
 
 
 # SET EMAIL AND PASSWORD
-my_email = "<Your email>"
+my_email = "<EMAIL>"
 # first turn on two-step verification from https://myaccount.google.com/
 # this password is coming -> https://myaccount.google.com/ -> Security -> App Password ->
 # Select give your app a name e.g., Python Mail and click create. COPY THE PASSWORD -
