@@ -23,13 +23,13 @@ class QuizInterface():
         self.score_label = tk.Label(text="Score: 0",fg='white',bg=THEME_COLOR, highlightthickness=0)
         self.score_label.grid(row=0, column=1)
 
-        false_img = tk.PhotoImage(file='images/false.png')
-        self.false_button = tk.Button(image=false_img, bg=THEME_COLOR, highlightthickness=0, command=self.answer_not_correct)
-        self.false_button.grid(row=3, column=1)
-
         true_image = tk.PhotoImage(file='images/true.png')
-        self.true_button = tk.Button(image=true_image, bg=THEME_COLOR, highlightthickness=0, command=self.answer_is_correct)
+        self.true_button = tk.Button(image=true_image, bg=THEME_COLOR, highlightthickness=0, command=self.press_true)
         self.true_button.grid(row=3, column=0)
+
+        false_img = tk.PhotoImage(file='images/false.png')
+        self.false_button = tk.Button(image=false_img, bg=THEME_COLOR, highlightthickness=0, command=self.press_false)
+        self.false_button.grid(row=3, column=1)
 
         self.get_next_question()
 
@@ -38,14 +38,27 @@ class QuizInterface():
 
 
     def get_next_question(self):
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question_text, text=q_text)
+        self.canvas.config(bg="White")
+        if self.quiz.still_has_questions():
+            self.score_label.config(text=f"Score: {self.quiz.score}")
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question_text, text=q_text)
+        else:
+            self.canvas.itemconfig(self.question_text, text="Fin\nCheck the Score", font=("Arial", 25, "bold"))
+            self.true_button.config(state=tk.DISABLED)
+            self.false_button.config(state=tk.DISABLED)
 
+    def press_true(self):
+        is_correct = self.quiz.check_answer("True")
+        self.give_feedback(is_correct)
 
-    def answer_is_correct(self):
-        self.quiz.check_answer("True")
-        self.get_next_question()
+    def press_false(self):
+        is_correct = self.quiz.check_answer("False")
+        self.give_feedback(is_correct)
 
-    def answer_not_correct(self):
-        self.quiz.check_answer("False")
-        self.get_next_question()
+    def give_feedback(self, is_correct):
+        if is_correct:
+            self.canvas.config(bg='Green')
+        else:
+            self.canvas.config(bg='Red')
+        self.window.after(1000, self.get_next_question)
