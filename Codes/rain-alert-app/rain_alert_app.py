@@ -1,4 +1,5 @@
 import requests
+import send_sms
 
 
 # To access the weather API, visit this website: https://openweathermap.org/
@@ -29,3 +30,6 @@ for hour_data in weather_data['list']:
     # If the id is less than 700, it indicates precipitation such as rain or snow.
     if int(weather_condition_id) < 700:
         will_rain = True
+
+if will_rain:
+    my_message = send_sms.message
