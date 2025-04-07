@@ -1,3 +1,7 @@
+import requests
+from datetime import datetime, timedelta
+from newsapi import NewsApiClient
+
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
@@ -9,14 +13,45 @@ NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 
 #TODO 1. - Get yesterday's closing stock price. Hint: You can perform list comprehensions on Python dictionaries. e.g. [new_value for (key, value) in dictionary.items()]
 
+# replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={STOCK_NAME}&apikey=7OAUKXQGVKQ0O078'
+r = requests.get(url)
+data = r.json()['Time Series (Daily)']
+yesterday = (datetime.today() - timedelta(days=3)).strftime('%Y-%m-%d')
+
+for item in data.items():
+    if yesterday == item[0]:
+        yesterday_price = item[1]['4. close']
+
 #TODO 2. - Get the day before yesterday's closing stock price
+
+before_yesterday = (datetime.today() - timedelta(days=4)).strftime('%Y-%m-%d')
+
+for item in data.items():
+    if before_yesterday == item[0]:
+        before_yesterday_price = item[1]['4. close']
+
 
 #TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
 
+difference = abs(float(yesterday_price) - float(before_yesterday_price))
+
+
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
 
-#TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
+percentage_difference = (difference / float(before_yesterday_price)) * 100
+print(percentage_difference)
 
+#TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
+if percentage_difference > 10:
+    response_news = requests.get(NEWS_ENDPOINT)
+    newsapi = NewsApiClient(api_key='c9dc213929de4f88bcf44bb1a1760649')
+    top_headlines = newsapi.get_top_headlines(q='tesla',
+                                              sources='bbc-news,the-verge',
+                                              category='business',
+                                              language='en',
+                                              country='us')
+    print(top_headlines['articles'])
     ## STEP 2: https://newsapi.org/ 
     # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
 
