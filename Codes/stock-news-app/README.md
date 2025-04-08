@@ -26,3 +26,6 @@ This Python application monitors the daily stock price of Tesla (TSLA), calculat
 2. **Install dependencies**:
    ```bash
    pip install requests twilio
+   git clone https://github.com/Reza-1988/DailyCoding/Codes.git
+   cd stock-news-app.git
+   python stock_news_app.py
