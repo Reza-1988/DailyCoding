@@ -69,20 +69,20 @@ for result in results["exercises"]:
     # TODO: Choose one authentication method below (uncomment the desired option):
     # TODO: OPTION1: without authentication
     try:
-        sheet_response = requests.post(SHEETY_ENDPOINT, json=sheet_inputs)
-        sheet_response.raise_for_status()
-        print(sheet_response.text)
+        sheety_response = requests.post(SHEETY_ENDPOINT, json=sheet_inputs)
+        sheety_response.raise_for_status()
+        print(sheety_response.text)
     except requests.RequestException as err:
         print(f"Sheety API Error: {err}")
 
-# STEP 3- SET UP AUTHENTICATION
+# STEP 3- SET-UP AUTHENTICATION
 
     # TODO:OPTION2: If you set up basic Authentication use this part
     # I- Basic Authentication
     # Add either "Basic Authentication" or "Bearer Token" to your Sheety endpoint to secure it.
     # You can hardcode the token in your code for now while you test your code. Once you're sure it works.
     try:
-        sheet_response = requests.post(
+        sheety_response = requests.post(
           SHEETY_ENDPOINT,
           json=sheet_inputs,
           auth=(
@@ -90,8 +90,8 @@ for result in results["exercises"]:
               SHEETY_PASSWORD,
           )
         )
-        sheet_response.raise_for_status()
-        print(sheet_response.text)
+        sheety_response.raise_for_status()
+        print(sheety_response.text)
     except requests.RequestException as err:
         print(f"Sheety API Error: {err}")
 
@@ -103,13 +103,13 @@ for result in results["exercises"]:
         bearer_headers = {
         "Authorization": f"Bearer {SHEETY_TOKEN}"
         }
-        sheet_response = requests.post(
+        sheety_response = requests.post(
             SHEETY_ENDPOINT,
             json=sheet_inputs,
             headers=bearer_headers
         )
-        sheet_response.raise_for_status()
-        print(sheet_response.text)
+        sheety_response.raise_for_status()
+        print(sheety_response.text)
     except requests.RequestException as err:
         print(f"Sheety API Error: {err}")
 
