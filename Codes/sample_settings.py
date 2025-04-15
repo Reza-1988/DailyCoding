@@ -1,0 +1,4 @@
+FLIGHT_DATA = {
+    "AMADEUS_API_KEY": "",
+    "AMADEUS_API_SECRET": ""
+}

@@ -1,6 +1,4 @@
-import os
 import requests
-from pprint import pprint
 
 
 SHEETY_ENDPOINT = "https://api.sheety.co/46f6fe843e43c835235844778aa64ce1/flightDeals/prices"
@@ -22,16 +20,24 @@ class DataManager:
         sheety_response.raise_for_status()
         data = sheety_response.json()
         self.destination_data = data["prices"]
-        pprint(self.destination_data)  # printing the data out again using pprint() to see it formatted.
         return self.destination_data
 
     def update_destination_data(self):
-        for city in self.destination_data:
+        for row in self.destination_data:
             new_data = {
                 "price": {
-                    "iataCode": city["iataCode"],
+                    "iataCode": row["iataCode"],
                 }
             }
-            response = requests.put(f"{SHEETY_ENDPOINT}/{city['id']}", json=new_data)
-            print(response.text)
+            response = requests.put(f"{SHEETY_ENDPOINT}/{row['id']}", json=new_data)
 
+
+destination_data =[{'city': 'Paris', 'iataCode': 'PAR', 'lowestPrice': 54, 'id': 2},
+                   {'city': 'Frankfurt', 'iataCode': '', 'lowestPrice': 42, 'id': 3},
+                   {'city': 'Tokyo', 'iataCode': '', 'lowestPrice': 485, 'id': 4},
+                   {'city': 'Hong Kong', 'iataCode': '', 'lowestPrice': 551, 'id': 5},
+                   {'city': 'Istanbul', 'iataCode': '', 'lowestPrice': 95, 'id': 6},
+                   {'city': 'Kuala Lumpur', 'iataCode': '', 'lowestPrice': 414, 'id': 7},
+                   {'city': 'New York', 'iataCode': '', 'lowestPrice': 240, 'id': 8},
+                   {'city': 'San Francisco', 'iataCode': '', 'lowestPrice': 260, 'id': 9},
+                   {'city': 'Dublin', 'iataCode': '', 'lowestPrice': 378, 'id': 10}]
