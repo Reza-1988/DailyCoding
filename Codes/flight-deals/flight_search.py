@@ -1,9 +1,8 @@
 import requests
+from datetime import datetime
 
 
-import sys
-sys.path.append('/home/reza/Desktop/Python_Code/DailyCoding/Codes')
-from local_settings import FLIGHT_DATA
+from Codes.local_settings import FLIGHT_DATA
 
 
 TOKEN_ENDPOINT = "https://test.api.amadeus.com/v1/security/oauth2/token"
@@ -97,21 +96,46 @@ class FlightSearch:
         return code
 
 
-    def get_cheapest_flight(self):
+    def check_flights(self, origin, destination, from_time, to_time):
+        """
+              Searches for flight options between two cities on specified departure and return dates
+              using the Amadeus API.
+              Parameters:
+                  origin(str): The IATA code of the departure city.
+                  destination(str): The IATA code of the destination city.
+                  from_time (datetime): The departure date.
+                  to_time (datetime): The return date.
+              Returns:
+                  dict or None: A dictionary containing flight offer data if the query is successful; None
+                  if there is an error.
+              The function constructs a query with the flight search parameters and sends a GET request to
+              the API. It handles the response, checking the status code and parsing the JSON data if the
+              request is successful. If the response status code is not 200, it logs an error message and
+              provides a link to the API documentation for status code details.
+              """
+        # print(f"Using this token to check_flights() {self._token}")
         headers = {"Authorization": f"Bearer {self._token}"}
         query = {
-            "originLocationCode": "FRA",
-            "destinationLocationCode": "TYO",
-            "departureDate": "2025-05-02",
+            "originLocationCode": origin,
+            "destinationLocationCode": destination,
+            "departureDate": from_time.strftime("%Y-%m-%d"),
+            "returnDate": to_time.strftime("%Y-%m-%d"),
             "adults": 1,
-            "nonStop": "false",
+            "nonStop": "true",
+            "currencyCode": "GBP",
+            "max": "10"
         }
         response = requests.get(
             url=SHOPPING_ENDPOINT,
             headers=headers,
             params=query
         )
-        print(response.json())
 
-flight_search = FlightSearch()
-flight_search.get_cheapest_flight()
+        if response.status_code != 200:
+            print(f"check_flights() response code: {response.status_code}")
+            print(f"There was a problem with the flight search.\n"
+                    "https://developers.amadeus.com/self-service/category/flights/api-doc/flight-offers-search/api"
+                    "-reference")
+            print(f"response body: {response.text}")
+            return None
+        return response.json()
