@@ -36,8 +36,20 @@ for destination in sheet_data:
     )
     cheapest_flight = find_cheapest_flight(flights)
     print(f"{destination['city']}: £{cheapest_flight.price}")
-    if cheapest_flight.price != "N/A" and cheapest_flight.price < destination["lowestPrice"]:
-        print(f"Lower price flight found to {destination['city']}!")
+    time.sleep(2)
+
+    if cheapest_flight.price != "N/A":
+        print(f"No direct flight to {destination['city']}. looking for indirect flights...")
+        stopover_flights = flight_search.check_flights(
+            ORIGIN_CITY_IATA,
+            destination["iataCode"],
+            from_time=tomorrow,
+            to_time=six_months_from_today,
+            is_direct = False
+        )
+        cheapest_flight = find_cheapest_flight(stopover_flights)
+        print(f"cheapest indirect flight price is: £{cheapest_flight.price}")
+
         notification_manager = NotificationManager()
         notification_manager.send(f"Low price alert! Only £{cheapest_flight.price} to fly "
                          f"from {cheapest_flight.origin} to {cheapest_flight.destination}, "

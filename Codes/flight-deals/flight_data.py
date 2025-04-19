@@ -1,5 +1,5 @@
 class FlightData:
-    def __init__(self, price, origin, destination, out_date, return_date):
+    def __init__(self, price, origin, destination, out_date, return_date, stops):
         """
         Constructor for initializing a new flight data instance with specific travel details.
         Parameters:
@@ -8,12 +8,14 @@ class FlightData:
         - destination_airport: The IATA code for the flight's destination airport.
         - out_date: The departure date for the flight.
         - return_date: The return date for the flight.
+        - stops: 0 for direct flights. 1 or more for indirect flights
         """
         self.price = price
         self.origin = origin
         self.destination = destination
         self.out_date = out_date
         self.return_date = return_date
+        self.stop = stops
 
 
 def find_cheapest_flight(data):
@@ -40,9 +42,13 @@ def find_cheapest_flight(data):
     # Data from the first flight in the JSON
     first_flight = data["data"][0]
     lowest_price = float(first_flight["price"]["grandTotal"])
+    # A flight with 2 segments will have 1 stop
+    nr_stops = len(first_flight["itineraries"][0]["segments"]) - 1
     origin = first_flight["itineraries"][0]["segments"][0]["departure"]["iataCode"]
-    destination = first_flight["itineraries"][0]["segments"][0]["arrival"]["iataCode"]
+    # The Final destination is found in the last segment of the flight
+    destination = first_flight["itineraries"][0]["segments"][nr_stops]["arrival"]["iataCode"]
     out_date = first_flight["itineraries"][0]["segments"][0]["departure"]["at"].split("T")[0]
+    # Return date is the first segment of the second itinerary
     return_date = first_flight["itineraries"][1]["segments"][0]["departure"]["at"].split("T")[0]
 
     # Initialize FlightData with the first flight for comparison
@@ -53,7 +59,7 @@ def find_cheapest_flight(data):
         if price < lowest_price:
             lowest_price = price
             origin = flight["itineraries"][0]["segments"][0]["departure"]["iataCode"]
-            destination = flight["itineraries"][0]["segments"][0]["arrival"]["iataCode"]
+            destination = flight["itineraries"][0]["segments"][nr_stops][0]["arrival"]["iataCode"]
             out_date = flight["itineraries"][0]["segments"][0]["departure"]["at"].split("T")[0]
             return_date = flight["itineraries"][1]["segments"][0]["departure"]["at"].split("T")[0]
     cheapest_flight = FlightData(lowest_price, origin, destination, out_date, return_date)
