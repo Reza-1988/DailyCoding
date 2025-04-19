@@ -1,7 +1,8 @@
 import requests
+from pprint import pprint
 
 
-SHEETY_ENDPOINT = "https://api.sheety.co/46f6fe843e43c835235844778aa64ce1/flightDeals/prices"
+from Codes.local_settings import SHEETY_DATA
 
 
 class DataManager:
@@ -11,12 +12,13 @@ class DataManager:
         # self.password = os.environ["SHEET_PASSWORD"]
         # self.auth = (sel.user, sel.password)
         self.destination_data = {}
+        self.customers_data = {}
 
     def get_destination_data(self):
         # 2. Use the Sheety API to GET all the data in that sheet and print it out.
         # Go to the link for the starting Google Sheet and make your own sheet.Then create a new project on Sheety to work with your Google sheet.
         # Use the Sheety API to GET all the data in that sheet and print it out. You should see something like this:
-        sheety_response = requests.get(SHEETY_ENDPOINT)
+        sheety_response = requests.get(SHEETY_DATA["SHEETY_ENDPOINT_PRICES"])
         sheety_response.raise_for_status()
         data = sheety_response.json()
         self.destination_data = data["prices"]
@@ -29,4 +31,13 @@ class DataManager:
                     "iataCode": row["iataCode"],
                 }
             }
-            response = requests.put(f"{SHEETY_ENDPOINT}/{row['id']}", json=new_data)
+            response = requests.put(f"{SHEETY_DATA['SHEETY_ENDPOINT_PRICES']}/{row['id']}", json=new_data)
+
+    def get_customer_emails(self):
+        response = requests.get(SHEETY_DATA["SHEETY_ENDPOINT_USERS"])
+        response.raise_for_status()
+        data = response.json()
+        self.customers_data = data["users"]
+        return self.customers_data
+
+
