@@ -41,3 +41,7 @@ class DataManager:
         return self.customers_data
 
 
+data_manager = DataManager()
+
+customer_emails = [row['whatIsYourEmail?'] for row in data_manager.get_customer_emails()]
+pprint(customer_emails)
