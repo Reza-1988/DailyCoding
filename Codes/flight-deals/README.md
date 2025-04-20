@@ -51,31 +51,10 @@ an SMS to the project owner.
    ```
 
 4. **Configure Settings**:
-    — Copy sample_settings.py to local_settings.py in the parent directory of the project:
-        ```python
-       SHEETY_DATA = {
-      "SHEETY_ENDPOINT_PRICES": "your-sheety-prices-endpoint",
-      "SHEETY_ENDPOINT_USERS": "your-sheety-users-endpoint"
-      }
-      FLIGHT_DATA = {
-      "AMADEUS_API_KEY": "your-amadeus-api-key",
-      "AMADEUS_API_SECRET": "your-amadeus-api-secret"
-      }
-        TWILIO_DATA = {
-            "ACCOUNT_SID": "your-twilio-account-sid",
-            "AUTH_TOKEN": "your-twilio-auth-token",
-            "TWILIO_PHONE_NUMBER": "your-twilio-phone-number",
-            "TO_PHONE_NUMBER": "your-verified-phone-number"
-        }
-        SMTP_DATA = {
-            "EMAIL": "your-email@example.com",
-            "PASSWORD": "your-app-password",
-            "SMTP_SERVER": "smtp.gmail.com"
-        }
-       ```
-    - Note: `local_settings.py` is ignored by `.gitignore` to protect sensitive information.
+   - Copy sample_settings.py to local_settings.py in the parent directory of the project:
+     - Note: `local_settings.py` is ignored by `.gitignore` to protect sensitive information.
 
 5. **Set Up Google Sheets**:
    - Create a Google Sheet for destinations with columns: city, iataCode, lowestPrice, id.
    - Create a Google Sheet for customers (e.g., via a Google Form) with columns: firstName, lastName, whatIsYourEmail?.
-   - Link these sheets to Sheety to obtain API endpoints.
+   - Link these sheets to Sheety to get API endpoints.
