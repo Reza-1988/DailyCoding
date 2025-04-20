@@ -9,6 +9,7 @@ TOKEN_ENDPOINT = "https://test.api.amadeus.com/v1/security/oauth2/token"
 IATA_ENDPOINT = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
 SHOPPING_ENDPOINT = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
+
 class FlightSearch:
     """
     Initialize an instance of the FlightSearch class.
@@ -48,7 +49,7 @@ class FlightSearch:
         # New bearer token. Typically expires in 1799 seconds (30min)
         print(f"Your token is {response.json()['access_token']}")
         print(f"Your token expires in {response.json()['expires_in']} seconds")
-        return response.json()['access_token']
+        return response.json()["access_token"]
 
     def get_destination_code(self, city_name):
         """
@@ -68,7 +69,7 @@ class FlightSearch:
                - If the expected key is not found in the response (i.e., the 'iataCode' key is missing, leading
                to a KeyError), it logs a message indicating that no airport code was found for the city
                and returns "Not Found".
-               """
+        """
         print(f"Using this token to get destination {self._token}")
         headers = {"Authorization": f"Bearer {self._token}"}
         query = {
@@ -76,16 +77,12 @@ class FlightSearch:
             "max": "2",
             "include": "AIRPORTS",
         }
-        response = requests.get(
-            url=IATA_ENDPOINT,
-            headers=headers,
-            params=query
-        )
+        response = requests.get(url=IATA_ENDPOINT, headers=headers, params=query)
 
         # print(f"Status code {response.status_code}. Airport IATA: {response.text}")
 
         try:
-            code = response.json()["data"][0]['iataCode']
+            code = response.json()["data"][0]["iataCode"]
         except IndexError:
             print(f"IndexError: No airport code found for {city_name}.")
             return "N/A"
@@ -95,25 +92,24 @@ class FlightSearch:
 
         return code
 
-
     def check_flights(self, origin, destination, from_time, to_time, is_direct=True):
         """
-              Searches for flight options between two cities on specified departure and return dates
-              using the Amadeus API.
-              Parameters:
-                  is_direct (bool): True for non-stop flights.
-                  origin(str): The IATA code of the departure city.
-                  destination(str): The IATA code of the destination city.
-                  from_time (datetime): The departure date.
-                  to_time (datetime): The return date.
-              Returns:
-                  dict or None: A dictionary containing flight offer data if the query is successful; None
-                  if there is an error.
-              The function constructs a query with the flight search parameters and sends a GET request to
-              the API. It handles the response, checking the status code and parsing the JSON data if the
-              request is successful. If the response status code is not 200, it logs an error message and
-              provides a link to the API documentation for status code details.
-              """
+        Searches for flight options between two cities on specified departure and return dates
+        using the Amadeus API.
+        Parameters:
+            is_direct (bool): True for non-stop flights.
+            origin(str): The IATA code of the departure city.
+            destination(str): The IATA code of the destination city.
+            from_time (datetime): The departure date.
+            to_time (datetime): The return date.
+        Returns:
+            dict or None: A dictionary containing flight offer data if the query is successful; None
+            if there is an error.
+        The function constructs a query with the flight search parameters and sends a GET request to
+        the API. It handles the response, checking the status code and parsing the JSON data if the
+        request is successful. If the response status code is not 200, it logs an error message and
+        provides a link to the API documentation for status code details.
+        """
         # print(f"Using this token to check_flights() {self._token}")
         headers = {"Authorization": f"Bearer {self._token}"}
         query = {
@@ -124,19 +120,17 @@ class FlightSearch:
             "adults": 1,
             "nonStop": "true" if is_direct else "false",
             "currencyCode": "GBP",
-            "max": "10"
+            "max": "10",
         }
-        response = requests.get(
-            url=SHOPPING_ENDPOINT,
-            headers=headers,
-            params=query
-        )
+        response = requests.get(url=SHOPPING_ENDPOINT, headers=headers, params=query)
 
         if response.status_code != 200:
             print(f"check_flights() response code: {response.status_code}")
-            print(f"There was a problem with the flight search.\n"
-                    "https://developers.amadeus.com/self-service/category/flights/api-doc/flight-offers-search/api"
-                    "-reference")
+            print(
+                f"There was a problem with the flight search.\n"
+                "https://developers.amadeus.com/self-service/category/flights/api-doc/flight-offers-search/api"
+                "-reference"
+            )
             print(f"response body: {response.text}")
             return None
         return response.json()

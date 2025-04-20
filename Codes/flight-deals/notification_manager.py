@@ -58,8 +58,10 @@ class NotificationManager:
             self.connection.login(user=self.email, password=self.password)
             for email in email_list:
                 self.connection.sendmail(
-                from_addr=self.email,
-                to_addrs=email,
-                msg=f"Subject:New Low Price Flight!\n\n{email_body}".encode('utf-8')
-            )
+                    from_addr=self.email,
+                    to_addrs=email,
+                    msg=f"Subject:New Low Price Flight!\n\n{email_body}".encode(
+                        "utf-8"
+                    ),
+                )
             print("Email sent")

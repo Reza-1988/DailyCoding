@@ -6,7 +6,7 @@ from Codes.local_settings import SHEETY_DATA
 
 
 class DataManager:
-    #This class is responsible for talking to the Google Sheet.
+    # This class is responsible for talking to the Google Sheet.
     def __init__(self):
         # self.user = os.environ["SHEET_USERNAME"]
         # self.password = os.environ["SHEET_PASSWORD"]
@@ -24,6 +24,7 @@ class DataManager:
         self.destination_data = data["prices"]
         return self.destination_data
 
+    # Make a Google sheet for your customers information with first/last name and email.(I make with a Google survey)
     def update_destination_data(self):
         for row in self.destination_data:
             new_data = {
@@ -31,7 +32,9 @@ class DataManager:
                     "iataCode": row["iataCode"],
                 }
             }
-            response = requests.put(f"{SHEETY_DATA['SHEETY_ENDPOINT_PRICES']}/{row['id']}", json=new_data)
+            response = requests.put(
+                f"{SHEETY_DATA['SHEETY_ENDPOINT_PRICES']}/{row['id']}", json=new_data
+            )
 
     def get_customer_emails(self):
         response = requests.get(SHEETY_DATA["SHEETY_ENDPOINT_USERS"])
@@ -39,9 +42,3 @@ class DataManager:
         data = response.json()
         self.customers_data = data["users"]
         return self.customers_data
-
-
-data_manager = DataManager()
-
-customer_emails = [row['whatIsYourEmail?'] for row in data_manager.get_customer_emails()]
-pprint(customer_emails)
