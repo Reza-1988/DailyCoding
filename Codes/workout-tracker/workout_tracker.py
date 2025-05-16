@@ -119,7 +119,7 @@ We can do this using Repl.it
 This is a free tool but requires email signup. So it's completely optional if you want to do this. It's not so much for learning Python, but it would be cool to have this "app" accessible from a web browser on mobile.
 Step 1 - Sign up for a free account on https://replit.com/
 Step 2 - Create a new Repl and name it Google-Workouts
-Step 3 - Copy and paste all your code into main.py on Replit.
+Step 3 - Copy and paste all your code into get_started.py on Replit.
 Step 4 - However, because Repl.it projects are public, we don't want other people to see our API keys and secrets.
 Add environment variables to Replit and store your Environment Variables by going into the Secrets tab and adding each environment variable as a key value pair
 HINT 1: Environment variables are declared without spaces!
