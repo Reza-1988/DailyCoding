@@ -20,3 +20,10 @@ SMTP_DATA = {
     "PASSWORD": "",
     "SMTP_SERVER": "",
 }
+
+SPOTIFY_DATA = {
+    "client_id":"YOUR_APP_CLIENT_ID",
+    "client_secret":"YOUR_APP_CLIENT_SECRET",
+    "redirect_uri":"YOUR_APP_REDIRECT_URI",
+    "scope":"user-library-read"
+}
