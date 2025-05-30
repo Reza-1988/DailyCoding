@@ -12,8 +12,6 @@ It's kind of like we're building a robot and telling it what to do on a browser.
 """
 
 
-
-
 # this web driver which is going to be driving the Chrome browser and doing all of our automated tasks.
 from selenium import webdriver
 
@@ -21,7 +19,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-LIVE_URL = "https://www.amazon.com/dp/B075CYMYK6?psc=1&ref_=cm_sw_r_cp_ud_ct_FM9M699VKHTT47YD50Q6"
+LIVE_URL = "https://python.org/"
 
 
 """to keep the browser open after our program finishes we have to configure our webdriver.
@@ -57,14 +55,26 @@ there's many ways that we can find different elements on a page using Selenium. 
 # to figure out how to use Selenium to find and locate specific HTML elements on the webpage.ust between where we quit our driver and where we get hold of a particular page.
 
 # to hold onto the dollar price element from the Amazon page. For the value, we'll grab the class name of the span from the Amazon page.
-price_dollar = driver.find_element(By.CLASS_NAME, value="a-price-whole")
-price_cents = driver.find_element(By.CLASS_NAME, value="a-price-fraction")
+# price_dollar = driver.find_element(By.CLASS_NAME, value="a-price-whole")
+# price_cents = driver.find_element(By.CLASS_NAME, value="a-price-fraction")
+
+# search_bar = driver.find_element(By.NAME, value="q")
+# print(search_bar.get_attribute("placeholder"))
+#
+# button = driver.find_element(By.ID, value="submit")
+# print(button.size)
+#
+# documentation_link = driver.find_element(By.CSS_SELECTOR, value=".documentation-widget a")
+# print(documentation_link.text)
+
+bug_link = driver.find_element(By.XPATH, value="/html/body/div/footer/div[1]/div/ul/li[4]/a")
+print(bug_link.get_attribute("href"))
 
 # price_dollar and price_cents are actually an HTML element. So if we want to have the text that's inside those elements,
 # we have to access the text content. And you can see here in the Selenium Docs, to get the text content,
 # all we need to do is just write .text after we found the element. So we can add .text to the price_dollar and price_cent.
 # So now we can actually get hold of the content that's inside those HTML elements.
-print(f"the price is {price_dollar.text}.{price_cents.text}")
+# print(f"the price is {price_dollar.text}.{price_cents.text}")
 
 
 """what's the difference between close and quit, you might wonder. Well, close actually just closes a single tab,
