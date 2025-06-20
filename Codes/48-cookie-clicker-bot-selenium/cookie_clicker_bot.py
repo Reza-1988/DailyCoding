@@ -16,11 +16,7 @@ It's kind of like we're building a robot and telling it what to do on a browser.
 """
 
 # OBJECTIVE: Build an automated bot to play the Cookie Clicker game
-# This script uses Selenium (a tool for automating web browsers) and Python to play the Cookie Clicker game.
-# The bot's goal is to click the cookie as fast as possible to earn cookies (the game's currency).
-# Every 5 seconds, it checks the right-hand panel for upgrades (like hiring grandmas or factories) that it can afford.
-# It then buys the most expensive upgrade it can afford to maximize cookie production efficiency.
-# The bot compares the number of cookies it has with the prices of upgrades to make smart purchasing decisions.
+
 
 # STEP 1: Define the URL of the Cookie Clicker game
 # This is the website where the game is hosted.
@@ -61,7 +57,7 @@ def purchase(store_items):
         money_element = money_element.replace(",", "")
     cookie_count = int(money_element)  # Convert the cookie count to an integer.
 
-    # 2. # Step 2: Retrieve the price for each upgrade element and store the data in a dictionary,
+    # Step 2: Retrieve the price for each upgrade element and store the data in a dictionary,
     # mapping each item name to its corresponding price.
     # IMPORTANT: You must fetch the prices inside the loop, not outside it.
     # This is because each time you purchase an upgrade, the price of that upgrade increases.
