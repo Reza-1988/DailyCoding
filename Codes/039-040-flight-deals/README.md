@@ -36,7 +36,7 @@ an SMS to the project owner.
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/Reza-1988/DailyCoding/Codes.git
-   cd flight-deals
+   cd 39-40-flight-deals
    pip install requests twilio smtplib
    ```
    

@@ -4,10 +4,10 @@ This project is part of the [100 Days of Python Bootcamp](https://www.udemy.com/
 ---
 
 ## Objective
-Create an **automated bot** uses `Selenium` and Python to automate gameplay in the Cookie Clicker game. 
-    - The bot continuously clicks the big cookie to earn cookies (the game's currency
-    - Intelligently purchases the most expensive affordable upgrade every 5 seconds to maximize cookie production efficiency. 
-    - The bot runs for 5 minutes and then displays the cookies-per-second rate.
+Create an **automated bot** uses `Selenium` and Python to automate gameplay in the Cookie Clicker game.
+- The bot continuously clicks the big cookie to earn cookies (the game's currency)
+- Intelligently purchases the most expensive affordable upgrade every 5 seconds to maximize cookie production efficiency. 
+- The bot runs for 5 minutes and then displays the cookies-per-second rate.
 
 ---
 
@@ -50,7 +50,7 @@ source .venv/bin/activate  # For Linux/macOS
 # Clone the repository
 git clone https://github.com/Reza-1988/DailyCoding.git
 # Navigate to the project directory
-cd DailyCoding/48-cookie-clicker-bot-selenium
+cd DailyCoding/048-cookie-clicker-bot-selenium
 ```
 
 ### 3. Install Requirements
