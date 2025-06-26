@@ -12,7 +12,6 @@ Create an **automated bot** uses `Selenium` and Python to automate gameplay in t
 ---
 
 ## 👺 Challenge
-
 1. Go to the game on web-site pages and familiarise yourself with how it works: [Cookie Clicker Game](https://orteil.dashnet.org/experiments/cookie/)
 2. Create a bot using Selenium(a tool for automating web browsers) and Python to click on the cookie as fast as possible.
 3. Every 5 seconds, check the right-hand pane to see which upgrades are affordable (like hiring grandmas or factories).
@@ -64,5 +63,7 @@ pip install selenium
 ```bash
 python cookie_clicker_bot.py
 ```
+---
+
 - You should see the browser open, the cookie being clicked rapidly, and upgrades being purchased automatically.
 After 5 minutes, the script will stop and display your cookies per second
