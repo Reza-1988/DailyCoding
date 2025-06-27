@@ -27,3 +27,9 @@ SPOTIFY_DATA = {
     "redirect_uri":"YOUR_APP_REDIRECT_URI",
     "scope":"user-library-read"
 }
+
+LINKEDIN_DATA = {
+    "EMAIL": "",
+    "PASSWORD": "",
+    "PHONE_NUMBER": ""
+}
