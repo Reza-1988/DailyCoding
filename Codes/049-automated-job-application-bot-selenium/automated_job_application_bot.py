@@ -32,7 +32,6 @@ driver.get(URL)  # Loads the LinkedIn job listings page using the filtered searc
 time.sleep(5) # Wait for the page to load fully
 
 # STEP 3: Automatically Login
-
 # 3.1: Navigate to the Sign-In page
 # When the LinkedIn job search page loads, a prompt may appear asking you how you'd like to sign in
 # (e.g., "Sign in with email", "Continue with Google", etc.).
@@ -43,36 +42,31 @@ try:
 except Exception as e:
     print("Sign-in button not found or already on login page:", e)
 
-
 # 3.2. Locate username(Email Or phone) and password fields in the Sign-In page and fill them.
 time.sleep(5)
 email_field = driver.find_element(by=By.ID, value="base-sign-in-modal_session_key")
 email_field.send_keys(LINKEDIN_DATA["EMAIL"])
 password_field = driver.find_element(by=By.ID, value="base-sign-in-modal_session_password")
 password_field.send_keys(LINKEDIN_DATA["PASSWORD"])
-
 # 3.3. Clik in Sign-in button
 password_field.send_keys(Keys.ENTER)
 
-# STEP 4: Apply to a job (Comment out this step if applying to all jobs)
-# Locate the apply button and Click it
-# - Note: This step is for testing a single application
-time.sleep(5)
-apply_button = driver.find_element(by=By.CSS_SELECTOR, value=".jobs-s-apply button")
-apply_button.click()
-
-# If application requires phone number and the field is empty, then fill in the number.
-time.sleep(5)
-phone = driver.find_element(by=By.CSS_SELECTOR, value="input[id*=phoneNumber]")
-if phone.text == "":
-    phone.send_keys(LINKEDIN_DATA["PHONE"])
-
-# Locate submit button the application and click it
-submit_button = driver.find_element(by=By.CSS_SELECTOR, value="footer button")
-submit_button.click()
+# # STEP 4: Apply to a job (Comment out this step if applying to all jobs)
+# # Locate the Easy Apply button and Click it
+# # - Note: This step is for testing a single application
+# time.sleep(5)
+# apply_button = driver.find_element(by=By.CSS_SELECTOR, value=".jobs-s-apply button")
+# apply_button.click()
+# # If application requires phone number and the field is empty, then fill in the number.
+# time.sleep(5)
+# phone = driver.find_element(by=By.CSS_SELECTOR, value="input[id*=phoneNumber]")
+# if phone.text == "":
+#     phone.send_keys(LINKEDIN_DATA["PHONE"])
+# # Locate submit button the application and click it
+# submit_button = driver.find_element(by=By.CSS_SELECTOR, value="footer button")
+# submit_button.click()
 
 # Step 5: Apply for all the jobs
-
 # 5.1: Define a function to abort complex applications
 # - Closes the application modal and discards the application if it requires multiple steps
 def abort_application():
@@ -83,7 +77,6 @@ def abort_application():
     # Find the discard button and click it
     discard_button = driver.find_elements(by=By.CLASS_NAME, value="artdeco-modal__confirm-dialog-btn")[1]
     discard_button.click()
-
 
 # 5.2: Retrieve all job listings on the current page
 # - Selects all clickable job cards using CSS selector
@@ -96,7 +89,7 @@ for listing in all_listings:
     listing.click()
     time.sleep(2)
     try:
-        # Locate and Click the Aapply Button
+        # Locate and Click the Easy Apply Button
         apply_button = driver.find_element(by=By.CSS_SELECTOR, value=".jobs-s-apply button")
         apply_button.click()
 
