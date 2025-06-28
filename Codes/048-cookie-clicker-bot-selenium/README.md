@@ -58,7 +58,7 @@ cd DailyCoding/048-cookie-clicker-bot-selenium
 pip install selenium
 ```
 
-### 3. Running the Bot
+### 4. Running the Bot
 
 ```bash
 python cookie_clicker_bot.py
