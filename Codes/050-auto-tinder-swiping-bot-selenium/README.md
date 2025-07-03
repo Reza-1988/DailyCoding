@@ -16,3 +16,10 @@ This project explores real-world use cases for Selenium by automating a popular 
 ---
 
 ## 👺 Challenge
+1. **Create a New Account**
+    1. If you don't have a Tinder account, set one up now. Make sure you can sign in to your account using Facebook or Google.
+       - If you don't want to use your own details, set up a new Facebook account and use an AI-generated image from https://www.thispersondoesnotexist.com/
+         - HINT: You can hit refresh on thispersondoesnotexist to generate new random images.
+    2. Manually go through the process of swiping on profiles and see which elements you'll need to target with your code.
+   - NOTE: If you don't want to disappoint anyone, you can always complete the tutorial and hit "NOPE" on everyone. 
+2. 
