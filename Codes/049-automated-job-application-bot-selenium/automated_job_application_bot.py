@@ -8,7 +8,7 @@ import time
 from Codes.local_settings import LINKEDIN_DATA
 
 
-# OBJECTIVE: Automate job applications on LinkedIn for "Python Developer" roles
+# OBJECTIVE: Build Automate job applications on LinkedIn for "Python Developer" roles
 
 # STEP 1: Define the LinkedIn Job Search URL
 # 1. If you don't want to use your primary account for this project, feel free to set up a new email and LinkedIn account.

@@ -22,4 +22,5 @@ This project explores real-world use cases for Selenium by automating a popular 
          - HINT: You can hit refresh on thispersondoesnotexist to generate new random images.
     2. Manually go through the process of swiping on profiles and see which elements you'll need to target with your code.
    - NOTE: If you don't want to disappoint anyone, you can always complete the tutorial and hit "NOPE" on everyone. 
-2. 
+2. **Navigate to Login Page**
+   - In order to avoid dual verification with a phone every time we log in, we'll need to use the Facebook/Google login. The Google login flow requires a lot more steps than Facebook login, so we'll go with Facebook in this challenge.
