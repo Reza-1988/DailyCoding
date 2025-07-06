@@ -33,3 +33,8 @@ LINKEDIN_DATA = {
     "PASSWORD": "",
     "PHONE_NUMBER": ""
 }
+
+TINDER_DATA = {
+    "EMAIL": "",
+    "PASSWORD": "",
+}

@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 import time
-
+from Codes.local_settings import TINDER_DATA
 
 # OBJECTIVE: Build Auto Tinder Swiping Bot
 
@@ -48,7 +48,7 @@ driver.find_element(By.XPATH, '//*[@id="facebook"]/body/div[2]/div[2]/div/div/di
 # 4.3 Fill in email and password fields for Facebook login
 time.sleep(2)
 fb_email = driver.find_element(By.ID, "email")
-fb_email.send_keys("<EMAIL>")
+fb_email.send_keys(TINDER_DATA["EMAIL"])
 fb_password = driver.find_element(By.ID, "pass")
-fb_password.send_keys("<PASSWORD>")
+fb_password.send_keys(TINDER_DATA["PASSWORD"])
 fb_password.send_keys(Keys.ENTER)
