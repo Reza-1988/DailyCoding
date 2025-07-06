@@ -23,4 +23,10 @@ This project explores real-world use cases for Selenium by automating a popular 
     2. Manually go through the process of swiping on profiles and see which elements you'll need to target with your code.
    - NOTE: If you don't want to disappoint anyone, you can always complete the tutorial and hit "NOPE" on everyone. 
 2. **Navigate to Login Page**
-   - In order to avoid dual verification with a phone every time we log in, we'll need to use the Facebook/Google login. The Google login flow requires a lot more steps than Facebook login, so we'll go with Facebook in this challenge.
+   - To avoid dual verification with a phone every time we log in. we'll need to use the Facebook/Google login. 
+     - The Google login flow requires a lot more steps than Facebook login, so we'll go with Facebook login.
+     - HINT 1: Make sure you've already manually signed-in and verified **your phone number** with Tinder as we can't automate the phone number verification.
+     - HINT 2: If you are getting a `NoSuchElementException`, make sure you've added some delay between clicking on buttons so that the new element has enough time to load.
+     - HINT 3: You might find it easier to right-click on the element and get the **XPath** to use with Selenium. e.g.
+3. **Login with Facebook**
+   - d
