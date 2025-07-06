@@ -29,4 +29,41 @@ This project explores real-world use cases for Selenium by automating a popular 
      - HINT 2: If you are getting a `NoSuchElementException`, make sure you've added some delay between clicking on buttons so that the new element has enough time to load.
      - HINT 3: You might find it easier to right-click on the element and get the **XPath** to use with Selenium. e.g.
 3. **Login with Facebook**
-   - d
+   1. The Facebook login page opens in a new window. For Selenium code to work on the new window, we have to switch to the window in front.
+      - In Selenium, each window has an identification handle. We can get all the window handles with:  
+        ```python
+        driver.window_handles
+        ```
+      - The above line of code returns a list of all the window handles. The first window is at position `0`, e.g.:
+        ```python
+        base_window = driver.window_handles[0]
+        ```
+      - New windows that have popped out from the base window are further down in the sequence, e.g.:
+        ```python
+        fb_login_window = driver.window_handles[1]
+        ```
+      - We can switch our Selenium driver to target the new Facebook login window with:
+        ```python
+        driver.switch_to.window(fb_login_window)
+        ```
+      - You can print the `driver.title` to verify that it's the Facebook login window that is currently targeted:
+        ```python
+        print(driver.title)
+        ```
+      - The full code to switch to the new pop-up window is thus:
+        ```python
+        base_window = driver.window_handles[0]
+        fb_login_window = driver.window_handles[1]
+        driver.switch_to.window(fb_login_window)
+        print(driver.title)
+        ```
+      - If successful, the printed title should be **"Facebook"** and not **"Tinder | Match. Chat. Date."**
+   2. Using what you have learnt about Selenium, fill in the Facebook login form and submit it to log in.
+   3. If successful, you should see the pop-up window disappear, and you're back on the Tinder page. e.g.
+      - At this point, you should revert back to the base_window and verify by printing the title of the Selenium controlled window title.
+      ```python
+      driver.switch_to.window(base_window)
+      print(driver.title)
+      ```
+      - If successful, it should print "Tinder | Match. Chat. Date."
+4. **Step 4 - Dismiss all requests**

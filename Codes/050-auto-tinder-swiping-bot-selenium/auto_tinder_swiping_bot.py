@@ -37,6 +37,7 @@ fb_login.click()
 # 4.1. Switch to the Facebook login window
 # The Facebook login page opens in a new window. We have to switch to new windows for selenium to work on it.
 time.sleep(2)
+base_window = driver.window_handles[0] # Get Tinder window identification handle
 fb_login_window = driver.window_handles[1] # Get Facebook window identification handle
 driver.switch_to.window(fb_login_window)
 print(driver.title) # If title print out "Facebook": process is fine.
@@ -52,3 +53,8 @@ fb_email.send_keys(TINDER_DATA["EMAIL"])
 fb_password = driver.find_element(By.ID, "pass")
 fb_password.send_keys(TINDER_DATA["PASSWORD"])
 fb_password.send_keys(Keys.ENTER)
+
+# 4.4 Switch back to Tinder window
+time.sleep(2)
+driver.switch_to.window(base_window)
+print(driver.title)
