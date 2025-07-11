@@ -5,8 +5,10 @@ class WorkPlaceIsFull(Exception):
 
 
 class Consts:
-
-    BASE_PRICE = {'mine': 150, 'school': 100, 'company': 90}
+    # You can change these numbers to your custom prices
+    BASE_PRICE = {'mine': 300, 'school': 100, 'company': 200}
+    BASE_PLACE_COST = 1000
+    LEVEL_MUL = 10
 
 
 class WorkPlace:
