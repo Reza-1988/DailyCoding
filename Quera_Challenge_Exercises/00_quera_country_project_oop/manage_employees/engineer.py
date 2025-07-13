@@ -1,6 +1,5 @@
 import math
-from person import Person, Consts
-
+from .person import Person, Consts
 
 class Engineer(Person):
     def __init__(self, name, age):

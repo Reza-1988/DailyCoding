@@ -1,5 +1,5 @@
 import math
-from work_place import WorkPlace, Consts
+from .work_place import WorkPlace, Consts
 
 
 class School(WorkPlace):

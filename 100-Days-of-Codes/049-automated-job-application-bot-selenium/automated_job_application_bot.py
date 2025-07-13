@@ -5,7 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 
 
-from Codes.local_settings import LINKEDIN_DATA
+from ..local_settings import LINKEDIN_DATA
 
 
 # OBJECTIVE: Build Automate job applications on LinkedIn for "Python Developer" roles

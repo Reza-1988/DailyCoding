@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 import time
-from Codes.local_settings import TINDER_DATA
+from ..local_settings import TINDER_DATA
 
 # OBJECTIVE: Build Auto Tinder Swiping Bot
 

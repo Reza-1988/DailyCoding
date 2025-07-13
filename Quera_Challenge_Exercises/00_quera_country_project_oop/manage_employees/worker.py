@@ -1,5 +1,5 @@
 import math
-from person import Person, Consts
+from .person import Person, Consts
 
 
 class Worker(Person):
