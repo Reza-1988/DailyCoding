@@ -3,31 +3,31 @@ This project is part of the [100 Days of Python Bootcamp](https://www.udemy.com/
  
 ---
 
-## Objective
+## Objective 
 Create an automated bot that uses Selenium and Python to interact with Tinder's web interface and perform automatic swiping actions.
 - The bot logs in to [Tinder](https://tinder.com/) using Facebook credentials.
-- It continuously swipes right on profiles to maximize match potential.
+- It continuously swipes right on profiles to maximize match potential. 
 - When a match occurs, it detects and dismisses the popup to resume swiping.
 - The bot respects Tinder's daily swipe limit and is intended for learning browser automation.
 
 This project explores real-world use cases for Selenium by automating a popular web app in a fun and engaging way.
-> ⚠️ Note: This project is for educational purposes only. Please use responsibly and ethically.
+> 💡 **NOTE:** This project is for educational purposes only. Please use responsibly and ethically.
 
 ---
 
-## 👺 Challenge
+## Challenge 👺
 1. **Create a New Account**
     1. If you don't have a Tinder account, set one up now. Make sure you can sign in to your account using Facebook or Google.
        - If you don't want to use your own details, set up a new Facebook account and use an AI-generated image from https://www.thispersondoesnotexist.com/
-         - HINT: You can hit refresh on thispersondoesnotexist to generate new random images.
+         - 👀 **HINT:** You can hit refresh on thispersondoesnotexist to generate new random images.
     2. Manually go through the process of swiping on profiles and see which elements you'll need to target with your code.
-   - NOTE: If you don't want to disappoint anyone, you can always complete the tutorial and hit "NOPE" on everyone. 
+   - 💡 **NOTE:** If you don't want to disappoint anyone, you can always complete the tutorial and hit "NOPE" on everyone. 
 2. **Navigate to Login Page**
    - To avoid dual verification with a phone every time we log in. we'll need to use the Facebook/Google login. 
      - The Google login flow requires a lot more steps than Facebook login, so we'll go with Facebook login.
-     - HINT 1: Make sure you've already manually signed-in and verified **your phone number** with Tinder as we can't automate the phone number verification.
-     - HINT 2: If you are getting a `NoSuchElementException`, make sure you've added some delay between clicking on buttons so that the new element has enough time to load.
-     - HINT 3: You might find it easier to right-click on the element and get the **XPath** to use with Selenium. e.g.
+     - 👀 **HINT 1:** Make sure you've already manually signed-in and verified **your phone number** with Tinder as we can't automate the phone number verification.
+     - 👀 **HINT 2:** If you are getting a `NoSuchElementException`, make sure you've added some delay between clicking on buttons so that the new element has enough time to load.
+     - 👀 **HINT 3:** You might find it easier to right-click on the element and get the **XPath** to use with Selenium. e.g.
 3. **Login with Facebook**
    1. The Facebook login page opens in a new window. For Selenium code to work on the new window, we have to switch to the window in front.
       - In Selenium, each window has an identification handle. We can get all the window handles with:  
@@ -66,4 +66,63 @@ This project explores real-world use cases for Selenium by automating a popular 
       print(driver.title)
       ```
       - If successful, it should print "Tinder | Match. Chat. Date."
-4. **Step 4 - Dismiss all requests**
+4. **Dismiss all requests**
+   - When you first login to Tinder, it will ask if it's ok to get your location, send you notifications and track your cookies. We need to dismiss all of these modal pop-ups.
+   - Using Selenium and Python:
+     - Click ALLOW for location.
+     - Click NOT INTERESTED for notifications.
+     - Click I ACCEPT for cookies 
+   - 👀 **HINT 1:** Finding the XPath will make it easier to target each element. 
+   - 👀 **HINT 2:** Adding some delay before targeting these elements will allow time for them to load up.
+
+5.  **Hit Like!**
+   - The final step is to like some people. Because it's the web version, we don't have to swipe right, all we need to do is to click on the "**Like**" button. 
+   - You'll want to add at least a **1-second delay** between "Likes" so that Tinder doesn't block you because you seem like a bot.
+   - 👀 **HINT 1:** It takes a while for Tinder to load up people near you, this is not a fixed time as it depends on a number of factors. When it's loading, the "Like" button will not be reachable, and you will get a `NoSuchElementException` if you try to find it. Use exception handling to handle this situation and wait 2 seconds before you retry. 
+   - 👀 **HINT 2:** Sometimes, as you are swiping, you'll get a match which is a pop-up on the same page. But this will mean that your Like button will be hidden behind the pop-up, and you'll get a `ElementClickInterceptedException`. e.g.
+     - You'll need to **dismiss** this by clicking on "BACK TO TINDER" to continue swiping.
+     - 💡 **NOTE:** On the free tier, Tinder only allows 100 "Likes" per day. 
+     
+---
+
+## Requirements
+
+- To run this script, you need:
+    - **Python** >= 3.12
+    - **Selenium** >= 4.33
+    - **Google Chrome**  browser installed.
+    - [ChromeDriver](https://chromedriver.chromium.org/downloads) (Download the version matching your Chrome browser)
+---
+
+## Installation
+
+### 1. Create a Virtual Environment (Optional but Recommended)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # For Linux/macOS
+# or
+.venv\Scripts\activate     # For Windows
+```
+
+### 2. Clone the Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/Reza-1988/DailyCoding.git
+# Navigate to the project directory
+cd DailyCoding/050-auto-tinder-swiping-bot-selenium.py
+```
+
+### 3. Install Requirements
+
+```bash
+pip install selenium
+```
+
+### 4. Running the Bot
+
+```bash
+python auto_tinder_swiping_bot.py
+```
+---

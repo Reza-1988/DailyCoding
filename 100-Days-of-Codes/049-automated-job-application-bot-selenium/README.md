@@ -11,7 +11,7 @@ Create an automated bot that uses Selenium to apply for jobs on LinkedIn using t
 
 ---
 
-## 👺 Challenge
+## Challenge 👺
 1. **Create a New Account**
    - Set up a new email account
    - If you don't want to use your primary account for this project, feel free to set up a new LinkedIn account and Configure your Profile
@@ -29,7 +29,7 @@ Create an automated bot that uses Selenium to apply for jobs on LinkedIn using t
         - Figur out how to click Sign In button and navigate Sign In page.
    4. Figure out how to automatically log in to LinkedIn using Selenium with you LinkedIn account.
      - Locate and fill in the username(email or phone) and password fields.
-     - Trigger the Sign In button to log into your LinkedIn account automatically.
+     - Trigger the Sign-In button to log into your LinkedIn account automatically.
 3. **Apply for a Job**
    - Use Selenium to automatically apply to the first job that only requires you to enter your phone number. 
 4. **Apply for all the jobs**
@@ -37,9 +37,9 @@ Create an automated bot that uses Selenium to apply for jobs on LinkedIn using t
     - The jobs need to have these above conditions:
       - We're only going to apply to the standard, 1-step applications
       - We're going to ignore the applications that require a note
-      - We're going to ignore the complex, multi-step applications
+      - We're going to ignore the complex, multistep applications
     - Figur our how to ignore the complex application by checking the `data-control-name` attribute for Submit Button.
-   - **HINT:** Selenium has a custom exception that gets raised when an element cannot be found it's called `NoSuchElementException`, You'll need to import it to use it:
+   - 👀 **HINT:** Selenium has a custom exception that gets raised when an element cannot be found it's called `NoSuchElementException`, You'll need to import it to use it:
    ```python
      from selenium.common.exceptions import NoSuchElementException
    ```
