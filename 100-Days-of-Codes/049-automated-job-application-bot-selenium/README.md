@@ -5,9 +5,9 @@ This project is part of the [100 Days of Python Bootcamp](https://www.udemy.com/
 
 ## Objective
 Create an automated bot that uses Selenium to apply for jobs on LinkedIn using the "Easy Apply" feature.
-- The bot sends applications to all job listings that meet your defined criteria (not just one at a time).
-- As an alternative, if you prefer not to send applications directly, the bot can "Save" the jobs and follow the companies instead.
-- The goal is to reduce the repetitive effort of manual applications and explore automation in real-world workflows.
+   - The bot sends applications to all job listings that meet your defined criteria (not just one at a time).
+   - As an alternative, if you prefer not to send applications directly, the bot can "Save" the jobs and follow the companies instead.
+   - The goal is to reduce the repetitive effort of manual applications and explore automation in real-world workflows.
 
 ---
 
