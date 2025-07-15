@@ -48,74 +48,16 @@ Create an automated bot that uses **BeautifulSoup** and **Selenium** to perform 
       - What's the price per month?
       - What's the link to the property?
    3. Click send and copy the link address of the form. You will need to use this in your program.
+4. **Fill Data in the Google Form Using Selenium**
+   - once you've scraped all of that data using Beautiful Soup, then you're going to be using Selenium to autofill in a Google form. to Add:
+     - address of the property,
+     - price per month  
+     - linked property
+   - we're going to fill out one of these forms per listing that we have on Zillow. 
+5. **Generate a Google Sheet from Form Responses**
+   - Once all of that form's been compiled, then you'll have the option to turn it into a spreadsheet.
+   - Open you Google form -> go to the **Responses tab** -> then click on **Link to Sheets** button -> to create a Google sheet from the responses that have been submitted.
+   - This is what you end up with, a spreadsheet with the address of the property, the price per month, and a link to the property.
+6. **Deliver to Your Client**
+   - once you've done this research, then you can send it to your client so that they can filter down on each of the listings  that match their criteria and decide which one they want to go and make a viewing.
 
-
-
-
-And then once you've scraped all of that data
-
-using Beautiful Soup, then you're going to be using Selenium
-
-to auto fill in a Google form.
-
-So we're going to be adding in the address of the property,
-
-the price per month and the linked property
-
-and of course, we're going to fill out one of these forms
-
-per listing that we have on Zillow.
-
-And once all of that form's been compiled,
-
-then you'll have the option to turn it into a spreadsheet.
-
-Whenever you create a form in Google Forms,
-
-you can see that when you go to the responses tab,
-
-you can click on this button
-
-in order to create a Google sheet from the responses
-
-that have been submitted
-
-and this is what you end up with,
-
-a spreadsheet with the address of the property,
-
-the price per month, and a link to the property.
-
-So this way, once you've done this research,
-
-then you can send it to your client
-
-so that they can filter down on each of the listings
-
-that match their criteria and decide which one they want to go
-
-and make a viewing.
-
-So this of course makes their job a little bit easier,
-
-and this is our research task
-
-that we're going to complete today.
-
-So the first part of scraping the data
-
-for the relevant listings is going to be done
-
-using Beautiful Soup and then the second part
-
-where we're going to be filling in this form is going to be done
-
-using Selenium.
-
-So that is the project.
-
-And once you're ready, head over to the next lesson
-
-and take a look at the requirements of the project
-
-and we can get started with the Capstone project.
