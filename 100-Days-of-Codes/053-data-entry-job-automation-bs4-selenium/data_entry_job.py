@@ -44,9 +44,9 @@ links_list = [url.get('href') for url in all_links]
 all_addresses = soup.find_all('address', attrs={'data-test': 'property-card-addr'})
 addresses_list = [address. get_text(strip=True).replace("|", " ") for address in all_addresses]
 
-# STEP 4: Set up your Google form and add Google form link in top
+# TODO: STEP 4: Set up your Google form and add Google form link in top
 
-# STEP 5: Fill the Google form use with selenium
+# STEP 5: Fill Out Data in the Google Form Using Selenium
 
 # Optional - Keep the browser open (helps diagnose issues if the script crashes)
 chrome_options = webdriver.ChromeOptions()
@@ -57,11 +57,12 @@ driver = webdriver.Chrome(options=chrome_options)
 # all inputs are inside of Class name "whsOnd", get all inputs with find_elements in a list after that going through each input with index
 inputs = driver.find_elements(By.CLASS_NAME, "whsOnd")
 
+# Loop through each listing and fill out the form with its data and submit the form
 for i in range (len(links_list)):
     # TODO: Add fill in the link to your own Google From
     driver.get(GOOGLE_FORM_LINK)
     time.sleep(2)
-    # all inputs are inside of Class name "whsOnd", get all inputs with find_elements in a list after that going through each input with index
+    # All form inputs are inside of Class name "whsOnd", get all inputs with find_elements in a list after that going through each input with index
     inputs = driver.find_elements(By.CLASS_NAME, "whsOnd")
     submit_button = driver.find_element(By.CLASS_NAME, "NPEfkd") # get the submit button
 

@@ -47,6 +47,8 @@ Create an automated bot that uses Selenium to apply for jobs on LinkedIn using t
    - You can adapt the project to save (all) the job(s) and follow the company that posted the listing(s) instead.
    - Instead of going with Easy Apply button, going with Save button.
 
+- You should see the script will launch a browser, automatically sign in to LinkedIn, and begin applying to jobs that match your specified criteria.
+
 ---
 
 ## Requirements
@@ -75,7 +77,7 @@ source .venv/bin/activate  # For Linux/macOS
 # Clone the repository
 git clone https://github.com/Reza-1988/DailyCoding.git
 # Navigate to the project directory
-cd DailyCoding/049-automated_job_application_bot.py
+cd DailyCoding/049-automated-job-application-bot-selenium
 ```
 
 ### 3. Install Requirements
