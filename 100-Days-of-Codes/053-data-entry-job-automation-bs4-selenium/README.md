@@ -38,10 +38,10 @@ Create an automated bot that uses **BeautifulSoup** and **Selenium** to perform 
      - **Address** — the full address of the listing
        - Create a list of addresses for all the listings you scraped.
        - Clean up the address data. Remove any newlines, pipe symbols (|), and unnecessary whitespace.
-         - 👀 **HINT:** One way is to use Python's `.replace()` and `.strip()` methods to remove the newlines, whitespace and pipe symbols.
+         - 💡 **HINT:** One way is to use Python's `.replace()` and `.strip()` methods to remove the newlines, whitespace and pipe symbols.
      - **Listing URL** — the link to the property details page
        - Create a list of links for all the listings you scraped.
-   - 👀 **HINT:** Remember to provide your user agent and accepted languages via a **header**.
+   - 💡 **HINT:** Remember to provide your user agent and accepted languages via a **header**.
 3. **Set up your own Google Form**
    - You need to create a new form in Google Forms.
      1. Go to https://docs.google.com/forms/ and create your own form:
