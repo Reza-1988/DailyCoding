@@ -73,3 +73,55 @@ class Panel:
                 self.admin_panel()
             else:
                 print("Invalid username or password. Please try again.")
+
+    def admin_panel(self):
+        print("--- Admin Panel ---")
+        print("1. Add Employee")
+        print("2. Remove Employee")
+        print("3. View Employee List")
+        print("4. Logout")
+
+        choice = self.get_choice(1, 4)
+        if choice == 1:
+            self.add_employee()
+        elif choice == 2:
+            self.remove_employee()
+        elif choice == 3:
+            self.view_employees()
+        elif choice == 4:
+            self.main_menu()
+        else:
+            print("Invalid choice. Please try again.")
+
+    def add_employee(self):
+        print("--- Add Employee ---")
+        print("1. Add")
+        print("0. Back")
+        choice = self.get_choice(0, 1)
+        if choice == 0:
+            self.admin_panel()
+        elif choice == 1:
+            first_name = input("Enter first name: ").strip()
+            last_name = input("Enter last name: ").strip()
+            email = input("Enter email: ")
+
+            while not self.validate_email(email):
+                print("Invalid email! Please try again.")
+                email = input("Enter email: ").strip()
+
+            username = input("Enter username: ").strip()
+            password = input("Enter password: ").strip()
+            while not self.validate_password(password):
+                print("Password must include letters, digits, and '@' or '&'. Please try again.")
+                password = input("Enter password: ").strip()
+
+            employee = {
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "username": username,
+                "password": password
+            }
+            Panel.employees.append(employee)
+            print(f"Employee {first_name} {last_name} added successfully!")
+            self.admin_panel()
