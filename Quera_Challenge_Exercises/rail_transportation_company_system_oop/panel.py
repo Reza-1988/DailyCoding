@@ -39,3 +39,37 @@ class Panel:
             return
         else:
             print("Invalid choice. Please try again.")
+
+    def validate_email(self, email):
+        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+
+        if re.match(pattern, email):
+            return True
+        else:
+            return False
+
+    def validate_password(self, password):
+        if len(password) < 6:
+            return False
+
+        has_letter = re.search(r'[a-zA-Z]', password)
+        has_digit = re.search(r'\d', password)
+        has_special_char = re.search(r'[!@#$%^&*(),.?":{}|<>]', password)
+
+        return has_letter is not None and has_digit is not None and has_special_char is not None
+
+    def admin_login(self):
+        print("--- Admin Login ---")
+        print("1. Login")
+        print("0. Back")
+        choice = self.get_choice(0, 1)
+        if choice == 0:
+            self.main_menu()
+        elif choice == 1:
+            username = input("Enter admin username: ")
+            password = input("Enter admin password: ")
+            if username == Panel._admin_username and password == Panel._admin_password:
+                print("Admin logged in successfully!")
+                self.admin_panel()
+            else:
+                print("Invalid username or password. Please try again.")
