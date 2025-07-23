@@ -1,5 +1,3 @@
-
-
 class Proxy:
     def __init__(self, obj: object) -> None:
         self._obj = obj
@@ -20,13 +18,10 @@ class Proxy:
         raise AttributeError("No such attribute.")
 
 
-
     def last_accessed_attribute(self) -> str:
         if self._last_accessed is  None:
             raise Exception("No attribute was accessed.")
         return self._last_accessed
-
-
 
     def count_of_accesses(self, attribute_name: str) -> int:
         return self._access_counts.get(attribute_name, 0)
