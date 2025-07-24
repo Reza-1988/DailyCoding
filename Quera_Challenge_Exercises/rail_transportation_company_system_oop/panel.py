@@ -125,3 +125,41 @@ class Panel:
             Panel.employees.append(employee)
             print(f"Employee {first_name} {last_name} added successfully!")
             self.admin_panel()
+
+    def remove_employee(self):
+        print("--- Remove Employee ---")
+        print("1. remove")
+        print("0. Back")
+        choice = self.get_choice(0, 1)
+        if choice == 0:
+            self.admin_panel()
+        elif choice == 1:
+            print(f"Usernames are: {Panel.employees}")
+            username = input('Enter the username of the employee to remove: ').strip()
+
+            for idx, emp in enumerate(Panel.employees):
+                if emp["username"] == username:
+                    del Panel.employees[idx]
+                    print(f"Employee with username '{username}' removed")
+                    break
+
+                else:
+                    print('The username does not exist! Please try again')
+            self.admin_panel()
+
+    def view_employees(self):
+        print("--- View Employee List ---")
+        print("1. View Employees")
+        print("0. Back")
+        choice = self.get_choice(0, 1)
+        if choice == 0:
+            self.admin_panel()
+        elif choice == 1:
+            if not Panel.employees:
+                print("There are no employees")
+            else:
+                print('List of Employees:')
+                for emp in Panel.employees:
+                    print(
+                        f'Username: {emp["username"]}, First Name: {emp["first_name"]}, Last Name: {emp["last_name"]}, Email: {emp["email"]}, Password: {emp["password"]}\n')
+            self.admin_panel()
