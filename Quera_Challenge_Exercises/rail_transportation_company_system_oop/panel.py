@@ -163,3 +163,27 @@ class Panel:
                     print(
                         f'Username: {emp["username"]}, First Name: {emp["first_name"]}, Last Name: {emp["last_name"]}, Email: {emp["email"]}, Password: {emp["password"]}\n')
             self.admin_panel()
+
+    def train_employee_login(self):
+        print("--- Train Employee Login ---")
+        print("0. Back")
+        print("1. Login")
+        choice = self.get_choice(0, 1)
+        if choice == 0:
+            self.main_menu()
+        elif choice == 1:
+            while True:
+                username = input("Enter employee username: ").strip()
+                password = input("Enter employee password: ").strip()
+
+                found = False
+                for emp in Panel.employees:
+                    if emp['username'] == username and emp['password'] == password:
+                        print('Employee logged in successfully!')
+                        found = True
+                        self.employee()
+                        break
+                if not found:
+                    print('The username or password is Incorrect!')
+                else:
+                    break
