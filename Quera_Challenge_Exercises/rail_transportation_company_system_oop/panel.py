@@ -187,3 +187,33 @@ class Panel:
                     print('The username or password is Incorrect!')
                 else:
                     break
+
+    def employee(self):
+        print("--- Train Employee Panel ---")
+        print("1. Add Line")
+        print("2. Update Line")
+        print("3. Delete Line")
+        print("4. View Lines")
+        print("5. Add Train")
+        print("6. Delete Train")
+        print("7. View Trains")
+        print("8. Logout")
+
+        number_choice = self.get_choice(1, 8)
+        if number_choice == 1:
+            self.add_line()
+        elif number_choice == 2:
+            self.update_line()
+        elif number_choice == 3:
+            self.delete_line()
+        elif number_choice == 4:
+            self.view_lines()
+        elif number_choice == 5:
+            self.add_train()
+        elif number_choice == 6:
+            self.delete_train()
+        elif number_choice == 7:
+            self.view_trains()
+        elif number_choice == 8:
+            print("Logging out...")
+            self.main_menu()
