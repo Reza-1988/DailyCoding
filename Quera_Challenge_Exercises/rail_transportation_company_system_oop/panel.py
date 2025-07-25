@@ -217,3 +217,12 @@ class Panel:
         elif number_choice == 8:
             print("Logging out...")
             self.main_menu()
+
+    def get_choice(self, min_, max_):
+        while True:
+            try:
+                choice = int(input(f"Please enter a number between {min_} and {max_}: "))
+                if choice in range(min_, max_ + 1):
+                    return choice
+            except ValueError:
+                print(f"Invalid input, please enter a number between{min_}
