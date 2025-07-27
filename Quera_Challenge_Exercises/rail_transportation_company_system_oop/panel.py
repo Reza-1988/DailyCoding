@@ -225,4 +225,50 @@ class Panel:
                 if choice in range(min_, max_ + 1):
                     return choice
             except ValueError:
-                print(f"Invalid input, please enter a number between{min_}
+                print(f"Invalid input, please enter a number between{min_} and {max_}")
+
+    def add_line(self):
+        print("--- Add Line ---")
+        line_name = input("Enter line name: ").strip()
+        if line_name in Panel.lines:
+            print("Line already exists. Please enter a unique name.")
+        else:
+            start_point = input("Enter start location: ").strip()
+            end_point = input("Enter destination: ").strip()
+            train_number = input("Enter train number: ").strip()
+            stations = input("Enter station names (please separate names with comma): ").strip().split(",")
+            Panel.lines[line_name] = [start_point, end_point, train_number, stations]
+            print(f"Line '{line_name}' added successfully.")
+        self.employee()
+
+    def update_line(self):
+        if not Panel.lines:
+            print("No lines available to update.")
+            self.employee()
+            return
+
+        print("--- Update Line ---")
+        while True:
+            print("Available lines:", list(Panel.lines.keys()))
+            line_name = input("Enter the line name to update: ").strip()
+            if line_name in Panel.lines:
+                start_point, end_point, train_number, stations = Panel.lines[line_name]
+                print(f"Current details: \nStart Point: {start_point} \nEnd Point: {end_point} \nStations: {stations}")
+                print("1. Update Start Point")
+                print("2. Update End Point")
+                print("3. Update Stations Names")
+                number_field = self.get_choice(1, 3)
+                if number_field == 1:
+                    new_start_point = input("Enter new start location: ").strip()
+                    Panel.lines[line_name][0] = new_start_point
+                elif number_field == 2:
+                    new_end_point = input("Enter new end location: ").strip()
+                    Panel.lines[line_name][1] = new_end_point
+                elif number_field == 3:
+                    new_stations = input("Enter new stations (comma-separated): ").strip().split(",")
+                    Panel.lines[line_name][2] = new_stations
+                print(f"Line '{line_name}' updated successfully.")
+                break
+            else:
+                print("Invalid line name. Please try again.")
+        self.employee()
