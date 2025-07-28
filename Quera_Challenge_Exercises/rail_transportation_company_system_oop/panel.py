@@ -272,3 +272,21 @@ class Panel:
             else:
                 print("Invalid line name. Please try again.")
         self.employee()
+
+        def delete_line(self):
+            if len(Panel.lines) == 0:
+                print("No lines available to delete.")
+                self.employee()
+                return
+
+            print("--- Delete Line ---")
+            while True:
+                print("Available lines:", list(Panel.lines.keys()))
+                line_name = input("Enter the line name to delete: ").strip()
+                if line_name in Panel.lines:
+                    del Panel.lines[line_name]
+                    print(f"Line '{line_name}' deleted successfully.")
+                    break
+                else:
+                    print(f"Line '{line_name}' does not exist. Please try again.")
+            self.employee()
