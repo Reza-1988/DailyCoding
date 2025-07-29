@@ -317,3 +317,19 @@ class Panel:
                     print(f"Train ID: {train_id} \nName: {details[0]} \nLine: {details[1]} \nSpeed: {details[2]} "
                           f" \nStop Time: {details[3]} \nQuality: {details[4]} \nTicket: {details[5]} \nCapacity: {details[6]}")
                 self.employee()
+
+        def user_menu(self):
+            print("--- User Menu ---")
+            print("1. Register")
+            print("2. Login")
+            print("3. Return To Main Menu")
+            print(Panel.users)
+
+            choice = self.get_choice(1, 3)
+            if choice == 1:
+                self.user_register()
+            elif choice == 2:
+                self.user_login()
+            elif choice == 3:
+                print("going back to main menu")
+                self.main_menu()
