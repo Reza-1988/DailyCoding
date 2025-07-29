@@ -290,3 +290,30 @@ class Panel:
                 else:
                     print(f"Line '{line_name}' does not exist. Please try again.")
             self.employee()
+
+        def delete_train(self):
+            if len(Panel.lines) == 0:
+                print("No trains available to delete.")
+                self.employee()
+                return
+            print("--- Delete Train ---")
+            while True:
+                print("Available trains:", list(Panel.trains.keys()))
+                train_id = input("Enter the train ID to delete: ").strip()
+                if train_id in Panel.trains:
+                    del Panel.trains[train_id]
+                    print(f"Train with ID: {train_id}, deleted successfully.")
+                    break
+                else:
+                    print(f"Train with ID: {train_id}, does not exist. Please try again.")
+            self.employee()
+
+        def view_trains(self):
+            if len(Panel.trains) == 0:
+                print("No trains available.")
+            else:
+                print("\n--- List of Trains ---")
+                for train_id, details in Panel.trains.items():
+                    print(f"Train ID: {train_id} \nName: {details[0]} \nLine: {details[1]} \nSpeed: {details[2]} "
+                          f" \nStop Time: {details[3]} \nQuality: {details[4]} \nTicket: {details[5]} \nCapacity: {details[6]}")
+                self.employee()
