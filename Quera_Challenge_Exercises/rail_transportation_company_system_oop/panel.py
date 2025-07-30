@@ -333,3 +333,38 @@ class Panel:
             elif choice == 3:
                 print("going back to main menu")
                 self.main_menu()
+
+        def user_register(self):
+            print("--- User Registration ---")
+            already_exists = False
+            while True:
+                email = input("Enter email: ").strip()
+                if self.validate_email(email=email) is False:
+                    print("Enter email again correctly")
+                    continue
+
+                for user in Panel.users:
+                    if user["email"] == email:
+                        print("Email already taken, enter new email")
+                        already_exists = True
+                if already_exists:
+                    continue
+                break
+            while True:
+                username = input("Enter username: ").strip()
+                for user in Panel.users:
+                    already_exists = False
+                    if user["username"] == username:
+                        print("username already taken, enter new email")
+                        already_exists = True
+                if already_exists:
+                    continue
+                break
+            while True:
+                password = input("Enter password: ").strip()
+                if self.validate_password(password=password) is False:
+                    print("enter password again correctly")
+                    continue
+                break
+            self.user(username, password, email)
+            self.user_menu()
