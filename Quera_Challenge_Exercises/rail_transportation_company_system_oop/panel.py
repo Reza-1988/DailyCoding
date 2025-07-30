@@ -368,3 +368,21 @@ class Panel:
                 break
             self.user(username, password, email)
             self.user_menu()
+
+        def user_login(self):
+            print("--- User Login ---")
+            while True:
+                username = input("enter username: ").strip()
+                password = input("enter password: ").strip()
+                is_correct = False
+                for user in Panel.users:
+                    if user["username"] == username:
+                        if user["password"] == password:
+                            print("username or password is wrong. enter again")
+                            is_correct = True
+                if is_correct:
+                    print("you entered successfully. you can go ...")
+                    self.panel_purchase(username)
+                    break
+                else:
+                    continue
