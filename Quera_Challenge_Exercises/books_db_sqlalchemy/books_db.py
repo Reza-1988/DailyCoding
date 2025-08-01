@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, relationship, mapped_column
 import sqlalchemy as db
 
-engine = create_engine("sqlite:///sqlalchemy_exercises.db")
+engine = create_engine("sqlite:///movie_rating_management_system_sqlalchemy.db")
 
 
 class Base(DeclarativeBase):
