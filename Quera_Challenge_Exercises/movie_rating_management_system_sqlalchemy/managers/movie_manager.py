@@ -1,7 +1,8 @@
-from sqlalchemy import select
+from datetime import datetime
+from sqlalchemy import select, func
 from sqlalchemy.orm import Session
 
-from .. models import Movie, Genre
+from .. models import Movie, Genre, Review
 
 
 class MovieManager:
@@ -29,14 +30,9 @@ class MovieManager:
 
 
     def get_reviews(self, movie_id: int):
-        movie = self.session.get(Movie, movie_id)
-        return movie.reviews
+        stmt = select(Review).where(Review.movie_id == movie_id)
+        return self.session.execute(stmt).scalars().all()
 
     def get_average_rating(self, movie_id: int):
-        movie = self.session.get(Movie, movie_id)
-
-        if not movie.reviews:
-            return None
-
-        sum_rating = sum(review.rating for review in movie.reviews)
-        return sum_rating / len(movie.reviews)
+        stmt = select(func.avg(Review.rating)).where(Review.movie_id == movie_id)
+        return self.session.execute(stmt).scalar_one_or_none()

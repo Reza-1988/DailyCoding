@@ -30,20 +30,20 @@ class ReviewManager:
     def get_latest_reviews_for_movie_by_time(self, movie_id: int, limit: int = 5):
         stmt = ( select(Review)
                  .where(Review.movie_id == movie_id)
-                 .order_by(Review.created_at.desc().limit(limit))
+                 .order_by(Review.created_at.desc())
+                 .limit(limit)
         )
         return self.session.execute(stmt).scalars().all()
 
     def get_highest_rated_reviews(self, movie_id: int, limit: int = 5):
         stmt = ( select(Review)
                  .where(Review.movie_id == movie_id)
-                 .order_by(Review.rating.desc().limit(limit))
+                 .order_by(Review.rating.desc()).limit(limit)
         )
         return self.session.execute(stmt).scalars().all()
 
     def get_average_rating_by_user(self):
-        stmt = (
-            select(Review.user_id, func.avg(Review.rating).lable("average_rating"))
+        stmt = (select(Review.user_id, func.avg(Review.rating).label("average_rating"))
                       .group_by(Review.user_id)
         )
         return self.session.execute(stmt).all()

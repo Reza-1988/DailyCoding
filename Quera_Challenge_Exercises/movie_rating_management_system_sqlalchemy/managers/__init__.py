@@ -1,0 +1,4 @@
+from user_manager import UserManager
+from genre_manager import GenreManager
+from movie_manager import MovieManager
+from review_manager import ReviewManager

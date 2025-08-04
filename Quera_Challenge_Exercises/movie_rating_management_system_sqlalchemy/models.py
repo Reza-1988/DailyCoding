@@ -51,7 +51,7 @@ class Review(Base):
     rating: Mapped[int] = mapped_column(nullable=False)
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=datetime.now)
-    update_at: Mapped[datetime] = mapped_column(default=datetime.now, on_update=datetime.now)
+    updated_at: Mapped[datetime] = mapped_column(default=datetime.now, on_update=datetime.now)
 
     movie: Mapped["Movie"] = relationship(back_populates="reviews")
     user: Mapped["User"] = relationship(back_populates="reviews")
