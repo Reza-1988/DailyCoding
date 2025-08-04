@@ -22,7 +22,7 @@ class GenreManager:
 
     def get_all(self):
         stmt = select(Genre)
-        retutn self.session.execute(stmt).scalars().all()
+        return self.session.execute(stmt).scalars().all()
 
 
     def get_genre_by_name(self, name: str) -> Genre | None:
