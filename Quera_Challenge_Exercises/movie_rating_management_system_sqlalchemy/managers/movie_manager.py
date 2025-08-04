@@ -4,9 +4,6 @@ from sqlalchemy.orm import Session
 from .. models import Movie, Genre
 
 
-
-
-
 class MovieManager:
     def __init__(self, session: Session) -> None:
         self.session = session
