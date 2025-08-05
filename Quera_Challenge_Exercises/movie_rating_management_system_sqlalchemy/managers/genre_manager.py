@@ -53,6 +53,14 @@ class GenreManager:
         )
         return query.all()
 
+    # alternative with new fashion way
 
-
+    def get_genres_with_most_movies(self) -> list[tuple]:
+        stmt = (
+            select(Genre, func.count(MovieGenre.movie_id).label("movie_count"))
+            .join(MovieGenre, Genre.id == MovieGenre.genre_id)
+            .group_by(Genre.id)
+            .order_by(func.count(MovieGenre.movie_id).desc())
+        )
+        return self.session.execute(stmt).all()
 
