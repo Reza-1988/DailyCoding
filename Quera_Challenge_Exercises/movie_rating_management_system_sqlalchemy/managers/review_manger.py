@@ -1,4 +1,5 @@
-from sqlalchemy import select, func
+from imdb.utils import re_titleRef
+from sqlalchemy import select, func, update
 from sqlalchemy.orm import Session
 
 from .. models import Review
@@ -47,3 +48,20 @@ class ReviewManager:
                       .group_by(Review.user_id)
         )
         return self.session.execute(stmt).all()
+
+    def update(self, review_id: int, update_data: dict) -> Review | None:
+        review = self.session.get(Review, review_id)
+        if review:
+            stmt = update(Review).where(Review.id == review_id).values(**update_data)
+            self.session.execute(stmt)
+            self.session.commit()
+            return review
+        return None
+
+    def delete(self, review_id: int) -> bool:
+        review = self.session.get(Review, review_id)
+        if review:
+            self.session.delete(review)
+            self.session.commit()
+            return True
+        return False
