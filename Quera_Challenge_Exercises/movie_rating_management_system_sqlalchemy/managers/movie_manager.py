@@ -41,6 +41,7 @@ class MovieManager:
         movie = self.session.get(Movie, movie_id)
         if movie:
             stmt = update(Movie).where(Movie.id == movie_id).values(**update_data)
+            self.session.execute(stmt)
             self.session.commit()
             return movie
         return None
@@ -72,8 +73,22 @@ class MovieManager:
         return self.session.execute(stmt).all()
 
     def get_movies_by_genre(self, genre_name: str) -> list[Movie]:
-        pass
+        stmt = (
+            select(Movie)
+            .join(MovieGenre, Movie.id == MovieGenre.movie_id)
+            .join(Genre, Genre.id == MovieGenre.genre_id)
+            .where(Genre.name == genre_name)
+        )
+        return self.session.execute(stmt).scalars().all()
 
 
     def get_top_rated_movies_by_genre(self):
-        pass
+        stmt = (
+            select(Genre.name, Movie.title, func.avg(Review.rating).label("average_rating"))
+            .join(MovieGenre, Genre.id == MovieGenre.genre_id)
+            .join(Movie, Movie.id == MovieGenre.movie_id)
+            .join(Review, Movie.id == Review.movie_id)
+            .group_by(Genre.name, Movie.title)
+            .order_by(Genre.name, func.avg(Review.rating).desc())
+        )
+        return self.session.execute(stmt).all()
