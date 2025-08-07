@@ -1,12 +1,38 @@
 import requests
 
+def find_category(url: str) -> str:
 
-URL =  "https://quera.org/college/3078/chapter/9356/lesson/31131/?comments_page=1&comments_filter=ALL"
-"https://quera.org/college/3078/chapter/9356/lesson/31131/"
-params = {"comments_page": 1, "comments_filter": "ALL"}
+    try:
+        response = requests.get(url)
+    except requests.exceptions.RequestException as e:
+        return "Bad Request"
 
-response = requests.get(URL)
+    if response.status_code != 200:
+        return "Bad Request"
 
-print(response.status_code)
+    try:
+        data = response.json()
+    except ValueError:
+        return "Bad Request"
 
-print(response.text)
+    if not data:
+        return "I can't recognize it"
+
+    if not isinstance(data, list):
+        return "I can't recognize it"
+
+    first_category = data[0].get("category")
+    if not first_category:
+        return "I can't recognize it"
+    flag = True
+    for book in data:
+        if first_category != book.get("category"):
+            flag = False
+    if not flag:
+        return "I can't recognize it"
+    return first_category
+
+
+
+
+
