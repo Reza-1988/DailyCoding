@@ -33,8 +33,8 @@ def draw_line(a: int,b: int,c: int,d: int):
     pygame.display.update()
 
 @command("draw circle")
-def draw_circle(x, y, r):
-    pygame.draw.circle(screen,border_color,(x,y),r, border_size)
+def draw_circle(x, g, r):
+    pygame.draw.circle(screen,border_color,(x,g),r, border_size)
     pygame.display.update()
 
 @command("draw polygon")
@@ -45,21 +45,14 @@ def draw_polygon(*num):
 
 @command("end drawing")
 def end_drawing():
-    pygame.image.save(screen, "solution_draw.png")
+    pygame.image.save(screen, "draw.png")
     return True
 
 def handle_command(user_line: str):
     user_line = user_line.strip()
     if not user_line:
         return None
-    parts = user_line.split()
-    if parts[0].lower() == "end" and len(parts) >= 2 and parts[1].lower() == "drawing":
-        func = command_registry.get("end drawing")
-        if func:
-            return func()
-        else:
-            return None
-
+    parts = user_line.split(" ")
     command_name = " ".join(parts[:2]).lower()
     args = parts[2:]
     func = command_registry.get(command_name)
