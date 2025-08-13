@@ -1,3 +1,4 @@
+from lxml.html.diff import cleanup_delete
 
 name_surname = {
     "esm" : [],
@@ -7,6 +8,8 @@ name_surname = {
     "ashia": [],
     "gaza" : []
 }
+
+participants_answers = dict()
 
 
 def ready_up() -> None:
@@ -26,7 +29,13 @@ def ready_up() -> None:
             name_surname["gaza"].append(parts[5].replace(" ", ""))
 
 def add_participant(participant: str, answers: dict[str, str]):
-    pass
+    cleaned_answers = dict()
+    for k, v in answers.items():
+        k_ = k.replace(" ", "")
+        v_ = v.replace(" ", "")
+        cleaned_answers[k_] = v_
+    participants_answers[participant] = cleaned_answers
+
 
 def calculate_all() -> dict[str, int]:
     pass
