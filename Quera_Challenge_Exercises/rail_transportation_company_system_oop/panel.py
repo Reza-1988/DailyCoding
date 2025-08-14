@@ -386,3 +386,30 @@ class Panel:
                     break
                 else:
                     continue
+
+        def user(self, username, password, email):
+
+            wallet_amount = int(''.join(str(random.randint(1, 9)) for _ in range(6)))
+            user = dict(username=username, password=password, email=email, wallet=wallet_amount)
+            Panel.users.append(user)
+            print("registration completed. you can login now!")
+
+        def generate_random_id(self, length=8):
+            characters = string.ascii_letters + string.digits  # Include letters and digits
+            random_id = ''.join(random.choice(characters) for _ in range(length))
+            return random_id
+
+        def panel_purchase(self, username):
+            print("--- Purchase Panel ---")
+            print("1. Menu Buy ticket")
+            print("2. Change account information")
+            print("3. Exit")
+            option = self.get_choice(min_=1, max_=3)
+
+            if option == 1:
+                self.menu_buy_ticket(username)
+            elif option == 2:
+                self.menu_change_account_information()
+            elif option == 3:
+                print("Logging out...")
+                self.user_menu()
