@@ -413,3 +413,48 @@ class Panel:
             elif option == 3:
                 print("Logging out...")
                 self.user_menu()
+
+        def menu_buy_ticket(self, username):
+            print("--- Buy Ticket Menu ---")
+            print("1. View Trains")
+            print("2. Add Funds to Wallet")
+            print("3. Buy Ticket")
+            print("4. View Recent Transactions")
+            print("5. Logout")
+            option = self.get_choice(min_=1, max_=5)
+            if option == 1:
+                self.view_trains()
+            elif option == 2:
+                self.add_funds(username)
+            elif option == 3:
+                self.buy_ticket(username)
+            elif option == 4:
+                self.view_transactions(username)
+            elif option == 5:
+                print("Logging out...")
+                self.user_menu()
+
+        def add_funds(self, username):
+            api = API()
+            while True:
+                try:
+                    amount = float(input("Enter the amount to add to your wallet: ").strip())
+                    card = int(input("enter your card number: ").strip())
+                    exp_year = int(input("enter your exp year: ").strip())
+                    exp_month = int(input("enter your exp month: ").strip())
+                    password = int(input("enter your card password: ").strip())
+                    cvv2 = int(input("enter your cvv2: ").strip())
+                except ValueError as e:
+                    print(f'Error :{e}')
+                    continue
+                if amount <= 0:
+                    print("Amount must be positive.")
+                    continue
+
+                if not api.validate(card, exp_month, exp_year, password, cvv2):
+                    print(f'somthing is wrong\n{card}\n{exp_year}\n{exp_month}\n{password}\n{cvv2}')
+                    continue
+                api.pay(card, exp_month, exp_year, password, cvv2, amount)
+                for user in Panel.users:
+                    if user['username'] == username:
+                        user['wallet'] += amount
