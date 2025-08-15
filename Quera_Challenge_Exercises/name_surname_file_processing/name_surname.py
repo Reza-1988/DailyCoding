@@ -1,4 +1,3 @@
-from lxml.html.diff import cleanup_delete
 
 name_surname = {
     "esm" : [],
@@ -39,9 +38,4 @@ def add_participant(participant: str, answers: dict[str, str]):
 
 def calculate_all() -> dict[str, int]:
     pass
-
-
-
-
-
 

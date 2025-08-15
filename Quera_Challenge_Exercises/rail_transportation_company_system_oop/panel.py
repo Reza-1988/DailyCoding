@@ -458,3 +458,42 @@ class Panel:
                 for user in Panel.users:
                     if user['username'] == username:
                         user['wallet'] += amount
+
+        def buy_ticket(self, username):
+            train_id = input("Enter the Train ID you want to buy a ticket for: ").strip()
+            print("Choose amount of ticket between 1 to 10: ")
+            quantity = self.get_choice(min_=1, max_=10)  # TODO
+            for user in Panel.users:  # TODO
+                if user['username'] == username:
+                    if train_id in Panel.trains.keys():
+                        train = Panel.trains[train_id]
+                        total_price = int(train[5]) * quantity
+
+                        user_wallet = user['wallet']
+                        if user_wallet >= total_price:
+                            if int(train[-1]) >= quantity:
+                                train[-1] = int(train[-1]) - quantity
+                                user['wallet'] -= total_price
+
+                                print("Ticket purchased successfully!")
+                            else:
+                                print("Not enough capacity available.")
+                        else:
+                            print("Insufficient funds in wallet.")
+                    else:
+                        print("Invalid Train ID. Please try again.")
+            self.menu_buy_ticket(username)
+
+        def view_transactions(self, username):  # TODO
+            try:
+                with open(f"{username}_transactions.txt", "r") as file:
+                    transactions = file.readlines()
+                    if transactions:
+                        print("--- Recent Transactions ---")
+                        for transaction in transactions:
+                            print(transaction.strip())
+                    else:
+                        print("No recent transactions.")
+            except IOError as error:
+                print(f"No such file, {error}")
+
