@@ -1,41 +1,63 @@
+import csv
 
-name_surname = {
-    "esm" : [],
-    "famil" : [],
-    "keshvar" : [],
-    "rang" : [],
-    "ashia": [],
-    "gaza" : []
-}
 
-participants_answers = dict()
+safe_list = {} # List of allowed words for each category
+participants = {} # Each player's answers
+repeats = {} # Number of repetitions of each answer in each category.
+scores = {} # Final score of each player
+special = []
 
 
 def ready_up() -> None:
-    with open('name_surname_data.csv', 'r', encoding="utf-8") as file:
+    l = []
+    safe_list.clear()
+    special.clear()
+    participants.clear()
+    repeats.clear()
+    scores.clear()
+    with open('name_surname_data.csv', newline='', encoding='utf-8') as csvfile:
+        file = csv.reader(csvfile)
+        for i, row in enumerate(file):
+            for j, ch in enumerate(row):
+                now = ch.replace(' ', '')
+                if i == 0:
+                    # First line: Category names (keys)
+                    safe_list[now] = []
+                    l.append(now)
+                    repeats[now] = {}
+                elif ch != '':
+                    safe_list[l[j]].append(now)
 
-        for i, line in enumerate(file):
-            if i == 0:
-                continue
-            parts = line.rstrip('\n').split(',')
-            if len(parts) < 6:
-                continue
-            name_surname["esm"].append(parts[0].replace(" ", ""))
-            name_surname["famil"].append(parts[1].replace(" ", ""))
-            name_surname["keshvar"].append(parts[2].replace(" ", ""))
-            name_surname["rang"].append(parts[3].replace(" ", ""))
-            name_surname["ashia"].append(parts[4].replace(" ", ""))
-            name_surname["gaza"].append(parts[5].replace(" ", ""))
 
 def add_participant(participant: str, answers: dict[str, str]):
-    cleaned_answers = dict()
-    for k, v in answers.items():
-        k_ = k.replace(" ", "")
-        v_ = v.replace(" ", "")
-        cleaned_answers[k_] = v_
-    participants_answers[participant] = cleaned_answers
+    for answer in answers:
+        now = answers[answer].replace(' ', '')
+        if now == '':
+            special.append(answer)
+        elif now not in repeats[answer]:
+            repeats[answer][now] = 1
+        else:
+            repeats[answer][now] += 1
+    participants[participant] = answers
 
 
 def calculate_all() -> dict[str, int]:
-    pass
+    for participant in participants:
+        score = 0
+        for category in participants[participant]:
+            now = participants[participant][category].replace(' ', '')
+            if now not in safe_list[category]:
+                score += 0
+            elif repeats[category][now] > 1:
+                if category in special:
+                    score += 10
+                else:
+                    score += 5
+            else:
+                if category in special:
+                    score += 15
+                else:
+                    score += 10
+        scores[participant] = score
+    return scores
 
