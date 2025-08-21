@@ -87,4 +87,42 @@ class Snake:
         pass
 
     def handle(self, keys):
-        pass
+        """
+        Handle direction changes for this frame based on pressed keys.
+
+        Args:
+            keys (list[str]): Characters pressed in this frame, e.g. ['a', 'd', 'w'].
+                              Only the first *valid* control key should take effect.
+
+        Logic:
+            - Build an inverse mapping from the configured control keys to directions:
+                  self.keys:  {'UP':'w','DOWN':'s','LEFT':'a','RIGHT':'d'}
+                  dir_map:    {'w':'UP','s':'DOWN','a':'LEFT','d':'RIGHT'}
+            - Iterate over the pressed keys in order (keys[0], keys[1], ...):
+                * If a pressed key maps to a direction (via dir_map), consider it as candidate `new_dir`.
+                * If `new_dir` is the exact opposite of the current direction, ignore it (no 180° turn).
+                * Otherwise, accept it:
+                    - set self.direction = new_dir
+                    - break (apply only the first valid change this frame).
+
+        Notes:
+            - If no pressed key is valid (or all are opposite), direction remains unchanged.
+            - This respects the "first valid key wins" requirement.
+        """
+
+        # Invert mapping: char -> direction (e.g., 'w' -> 'UP')
+        dir_map = {v:k for k,v in self.keys.items()}
+        for char in keys:
+            # Only consider keys that are configured for this snake
+            if char in dir_map:
+                new_dir = dir_map[char]
+                # Skip 180-degree turns (i.e., opposite directions).
+                # Using class-level dx/dy ensures a reliable, data-driven check:
+                # Opposite means the per-axis deltas sum to zero on both axes.
+                if not(
+                        (Snake.dx[new_dir] + Snake.dx[self.direction] == 0) and
+                        (Snake.dy[new_dir] + Snake.dy[self.direction] == 0)
+                ):
+                    # First valid change takes effect; ignore any remaining keys this frame
+                    self.direction = new_dir
+                    break
