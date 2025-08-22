@@ -8,7 +8,7 @@ def main():
 
     # Create the game screen using values defined in consts.py
     screen = pygame.display.set_mode((consts.height, consts.width))
-    screen.fill(consts.back_color)
+    screen.fill(consts.back_color) # show background immediately
 
     # Initialize the GameManager (handles the overall game logic and flow)
     game = GameManager(consts.table_size, screen, consts.sx, consts.sy, consts.block_cells)

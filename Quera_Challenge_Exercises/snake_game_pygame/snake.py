@@ -84,7 +84,62 @@ class Snake:
         return x
 
     def next_move(self):
-        pass
+        """
+        Advance the snake by one step according to its current direction.
+
+        Steps:
+        1) Compute the next head cell (with wraparound using val()).
+        2) Inspect the next cell's type by its color:
+           - Empty        -> consts.back_color
+           - Fruit        -> consts.fruit_color
+           - Blocked/Body -> consts.block_color or any non-empty, non-fruit color (snake bodies)
+        3) Apply the result:
+           - Blocked: call game.kill(self) and return.
+           - Fruit  : grow (append new head, DO NOT remove tail), paint new head with snake color.
+           - Empty  : move (append new head, remove tail), paint new head with snake color,
+                      clear old tail back to background.
+
+        Notes:
+        - This implementation treats any colored cell other than background/fruit as "blocked",
+          which covers obstacles and other snakes' bodies (and your own body).
+        - Wraparound behavior is handled by val() so exiting one edge enters from the opposite side.
+        """
+
+        # 1) next head position with wraparound
+        hx, hy = self.get_head()
+        nx = self.val(hx + Snake.dx[self.direction])
+        ny = self.val(hy + Snake.dy[self.direction])
+        nex_pos = (nx, ny)
+
+        # 2) read next cell & decide its type by color
+        nex_cell = self.game.get_cell(nex_pos)
+        next_cell_color = nex_cell.color
+
+        is_empty = (next_cell_color == consts.back_color)
+        is_fruit = (next_cell_color == consts.fruit_color)
+
+        # "blocked": obstacles OR any snake body color (i.e., anything not empty/fruit)
+        is_blocked = (next_cell_color == consts.block_color) or (not is_empty and not is_fruit)
+
+        # 3) apply outcome
+        if is_blocked:
+            # Collision with obstacle/any snake body -> die
+            self.game.kill(self)
+            return
+
+        if is_fruit:
+            self.cells.append(nex_pos)
+            nex_cell.set_color(self.color)
+            # (Spawning a new fruit, scoring, etc. is typically GameManager's job.)
+            return
+
+        # is_empty: normal move
+        if is_empty:
+            self.cells.append(nex_pos) # new head
+            next_cell_color.set_color(self.color) # pain new head
+
+            tail = self.cells.pop(0) # drop tail
+            self.game.get_cell(tail).set_color(consts.back_color) # clear old tail
 
     def handle(self, keys):
         """
@@ -112,10 +167,10 @@ class Snake:
 
         # Invert mapping: char -> direction (e.g., 'w' -> 'UP')
         dir_map = {v:k for k,v in self.keys.items()}
-        for char in keys:
+        for key in keys:
             # Only consider keys that are configured for this snake
-            if char in dir_map:
-                new_dir = dir_map[char]
+            if key in dir_map:
+                new_dir = dir_map[key]
                 # Skip 180-degree turns (i.e., opposite directions).
                 # Using class-level dx/dy ensures a reliable, data-driven check:
                 # Opposite means the per-axis deltas sum to zero on both axes.
