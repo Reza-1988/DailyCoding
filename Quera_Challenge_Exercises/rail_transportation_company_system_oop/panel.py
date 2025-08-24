@@ -510,3 +510,30 @@ class Panel:
                 return
             print(f"Transaction recorded for {username} in {file_name}")
 
+        def menu_change_account_information(self):  # TODO
+            while True:
+                found = False
+                username = input('Enter your username: ').strip()
+                for user in Panel.users:
+                    if user['username'] == username:
+                        email = user['email']
+                        password = user['password']
+                        found = True
+                if found:
+                    break
+
+            print(f"--- Account Information ---")
+            print("0. Return")
+            print(f"1. Username: {username}")
+            print(f"2. Email: {email}")
+            print(f"3. Password: ****")
+
+            option = self.get_choice(min_=0, max_=3)
+            if option == "0":
+                self.panel_purchase(username)
+            elif option == "1":
+                print("You can't change your username.")
+            elif option == "2":
+                self.change_email(email=email)
+            elif option == "3":
+                self.change_password(password)
