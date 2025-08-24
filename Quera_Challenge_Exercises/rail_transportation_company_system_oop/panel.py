@@ -497,3 +497,16 @@ class Panel:
             except IOError as error:
                 print(f"No such file, {error}")
 
+        def record_transaction(self, amount, transaction_type, train_id=None, quantity=None, username=None):  # TODO
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            file_name = f"{username}_transactions.txt"
+            try:
+                with open(file_name, "a") as file:
+                    transaction = f"{current_time} - {transaction_type}: Amount: {amount}, Train ID: {train_id if train_id else 'N/A'}, Quantity: {quantity if quantity else 'N/A'}\n"
+                    file.write(transaction)
+            except IOError as error:
+                print(f'IOError : {error}')
+                return
+            print(f"Transaction recorded for {username} in {file_name}")
+
