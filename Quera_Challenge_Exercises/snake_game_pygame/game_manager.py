@@ -132,22 +132,36 @@ class GameManager:
             - This method ensures that fruits are not clustered near snakes or obstacles,
               increasing gameplay variety and difficulty.
         """
+
+        # ret = output coordinate (initially invalid: -1,-1 means "not chosen yet")
         ret = -1, -1
+        # mx = "maximum of minimum distances so far"
+        # initialized with a very small number (-100) so that the first valid candidate
+        # will always replace it.
         mx = -100
 
         for i in range(0, self.size):
             for j in range(0, self.size):
-
+                # mn = "minimum distance for this candidate cell"
+                # initialized with a very large number so that any real distance
+                # computed will be smaller.
+                # (cleaner alternative would be: mn = float('inf'))
                 mn = 100000000
 
                 for x in range(0, self.size):
                     for y in range(0, self.size):
+                        # Only consider non-empty cells (occupied by snake, fruit, or obstacle)
                         if self.get_cell((x, y)).color != consts.back_color:
+                            # Manhattan distance to the occupied cell :  abs(x - i) + abs(y - j)
+                            # Keep the smallest distance → the closest object
                             mn = min(mn, int(abs(x - i) + abs(y - j)))
-
+                # Now mn = distance to the nearest occupied cell.
+                # Compare it to the best record so far (mx).
                 if mn > mx:
-                    mx = mn
-                    ret = i, j
+                    mx = mn  # update the "best so far" minimum distance
+                    ret = i, j  # update the best candidate coordinate
 
+        # ret now holds the coordinates of the chosen cell for the fruit
         return ret
 
+    def handle(self, keys):
