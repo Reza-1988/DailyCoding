@@ -112,8 +112,8 @@ class Snake:
         nex_pos = (nx, ny)
 
         # 2) read next cell & decide its type by color
-        nex_cell = self.game.get_cell(nex_pos)
-        next_cell_color = nex_cell.color
+        next_cell = self.game.get_cell(nex_pos)
+        next_cell_color = next_cell.color
 
         is_empty = (next_cell_color == consts.back_color)
         is_fruit = (next_cell_color == consts.fruit_color)
@@ -129,14 +129,14 @@ class Snake:
 
         if is_fruit:
             self.cells.append(nex_pos)
-            nex_cell.set_color(self.color)
+            next_cell.set_color(self.color)
             # (Spawning a new fruit, scoring, etc. is typically GameManager's job.)
             return
 
         # is_empty: normal move
         if is_empty:
             self.cells.append(nex_pos) # new head
-            next_cell_color.set_color(self.color) # pain new head
+            next_cell.set_color(self.color) # pain new head
 
             tail = self.cells.pop(0) # drop tail
             self.game.get_cell(tail).set_color(consts.back_color) # clear old tail

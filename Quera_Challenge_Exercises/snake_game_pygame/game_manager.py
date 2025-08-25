@@ -165,3 +165,40 @@ class GameManager:
         return ret
 
     def handle(self, keys):
+        """
+        Process one frame of game logic:
+          1) Deliver input keys to all snakes (direction changes).
+          2) Move all snakes one step (apply next_move).
+          3) Increment the global turn counter.
+          4) Every 10 turns, spawn a new fruit at an optimal position.
+
+        Args:
+            keys (list[str]): Characters pressed in this frame (e.g., ['a','d','w']).
+                              The same list is passed to each snake; each snake
+                              interprets only its own control keys.
+        """
+
+        # 1) Handle inputs for ALL snakes first
+        # Use a snapshot (list(...)) in case a snake gets killed/removed later;
+        # iterating the original list while it changes can skip items.
+        for s in list(self.snakes):
+            s.handle(keys)
+
+        # 2) Move ALL snakes after inputs are processed
+        # Again iterate over a snapshot to avoid issues if a snake dies during movement.
+        for s in list(self.snakes):
+            s.next_move()
+
+        # 3) Advance the turn counter
+        self.turn += 1
+
+        # 4) Spawn a fruit every 10 turns
+        if self.turn % 10 == 0:
+            coord = self.get_next_fruit_pos()  # (x, y) in grid coordinates
+            cell = self.get_cell(coord)  # retrieve the Cell object at that coord
+
+            # Safety checks:
+            # - get_cell could theoretically return None if coord is invalid
+            # - ensure we only paint a truly empty cell
+            if cell is not None and cell.color == consts.back_color:
+                cell.set_color(consts.fruit_color)
