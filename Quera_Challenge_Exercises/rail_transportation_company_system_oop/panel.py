@@ -555,3 +555,30 @@ class Panel:
                 else:
                     print("Please enter a correct email!")
 
+        def change_password(self, old_password):
+            while True:
+                new_password = input("Enter new password (or 0 to return): ").strip()
+                if new_password == "0":
+                    self.menu_change_account_information()
+                    return
+                elif self.validate_password(new_password):
+                    confirm_password = input("Confirm new password (or 0 to return): ").strip()
+                    if confirm_password == "0":
+                        self.menu_change_account_information()
+                        return
+                    elif new_password == confirm_password:
+                        for user in Panel.users:
+                            if user['password'] == old_password:
+                                user['password'] = new_password
+                        print("Password changed successfully!")
+                        self.menu_change_account_information()
+                        return
+                    else:
+                        print("Passwords do not match, try again!")
+                        continue
+                else:
+                    print("Enter a valid password!")
+
+        def validate_date(self, date):
+            pattern = r'^\d{4}-\d{2}-\d{2}$'
+            return re.match(pattern, date) is not None
