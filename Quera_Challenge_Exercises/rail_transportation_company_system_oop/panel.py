@@ -537,3 +537,21 @@ class Panel:
                 self.change_email(email=email)
             elif option == "3":
                 self.change_password(password)
+
+        def change_email(self, old_email):  # TODO
+            while True:
+                print("Enter your new email (or * to return): ")
+                new_email = input().strip()
+                if new_email == "*":
+                    self.menu_change_account_information()
+                    return
+                elif self.validate_email(new_email):
+                    for user in Panel.users:
+                        if old_email == user['email']:
+                            user['email'] = new_email
+                    print(f"Email changed to {new_email}")
+                    self.menu_change_account_information()
+                    return
+                else:
+                    print("Please enter a correct email!")
+

@@ -134,12 +134,11 @@ class Snake:
             return
 
         # is_empty: normal move
-        if is_empty:
-            self.cells.append(nex_pos) # new head
-            next_cell.set_color(self.color) # pain new head
+        self.cells.append(nex_pos) # new head
+        next_cell.set_color(self.color) # pain new head
 
-            tail = self.cells.pop(0) # drop tail
-            self.game.get_cell(tail).set_color(consts.back_color) # clear old tail
+        tail = self.cells.pop(0) # drop tail
+        self.game.get_cell(tail).set_color(consts.back_color) # clear old tail
 
     def handle(self, keys):
         """
